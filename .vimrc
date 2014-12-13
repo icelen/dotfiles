@@ -62,8 +62,26 @@ set lazyredraw                  "lz:    will not redraw the screen while running
 set pastetoggle=<F9>            "pt:    useful so auto-indenting doesn't mess up code when pasting
 set colorcolumn=80
 
-" Change directory to the path of the current file
-map <leader>cd :cd %:p:h<cr>
+set backspace=indent,eol,start
+
+set ruler
+set showcmd
+"screen setting
+inoremap jj <ESC>
+" vnoremap jj <ESC>
+inoremap <C-s> <ESC>:w<cr>a
+nnoremap <C-s> :w<cr>
+" inoremap <C-k> <ESC>:shell<cr>
+" nnoremap <C-k> :shell<cr>
+
+" disable arrowkeys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+nnoremap K gt
+nnoremap J gT
 
 syntax on
 
@@ -138,27 +156,6 @@ let g:airline_theme = 'bubblegum'
 " let g:airline_theme = 'airlineish'
 " let g:airline_theme = 'molokai'
 
-set backspace=indent,eol,start
-
-set ruler
-set showcmd
-"screen setting
-inoremap jj <ESC>
-" vnoremap jj <ESC>
-inoremap <C-s> <ESC>:w<cr>a
-nnoremap <C-s> :w<cr>
-" inoremap <C-k> <ESC>:shell<cr>
-" nnoremap <C-k> :shell<cr>
-
-" disable arrowkeys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-nnoremap K gt
-nnoremap J gT
-
 autocmd InsertEnter,InsertLeave * set cul!
 Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/syntastic'
@@ -176,12 +173,12 @@ let g:ctrlp_prompt_mappings = {
 " map <C-n> :NERDTreeToggle<CR>
 " Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
-Plugin 'jlanzarotta/bufexplorer'
-let g:bufExplorerFindActive=1        " Go to active window.
-nmap  <leader>be <Nop>
-nmap  <leader>bs <Nop>
-" nmap  <leader>bv <Nop>
-noremap <silent> <leader>bb :BufExplorerHorizontalSplit<CR>
+" Plugin 'jlanzarotta/bufexplorer'
+" let g:bufExplorerFindActive=1        " Go to active window.
+" nmap  <leader>be <Nop>
+" nmap  <leader>bs <Nop>
+" " nmap  <leader>bv <Nop>
+" noremap <silent> <leader>bb :BufExplorerHorizontalSplit<CR>
 
 Plugin 'tomtom/tcomment_vim'
 Plugin 'myusuf3/numbers.vim'
@@ -191,6 +188,11 @@ Plugin 'myusuf3/numbers.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'sjl/splice.vim'
+Plugin 'vim-pandoc/vim-pandoc'
+let g:pandoc#modules#disabled = ["folding"]
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-pandoc/vim-pandoc-after'
+let g:pandoc#after#modules#enabled = ["supertab", "unite.vim"]
 
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rsi'
