@@ -201,7 +201,7 @@ Plugin 'tpope/vim-rsi'
 " Plugin 'tpope/vim-unimpaired'
 Plugin 'repmo.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'chrisbra/changesPlugin'
+" Plugin 'chrisbra/changesPlugin'
 Plugin 'kien/rainbow_parentheses.vim'
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
