@@ -34,29 +34,25 @@ set expandtab
 set softtabstop=4
 set textwidth=120
 set autoindent
-" No ex-mode
-nnoremap Q <nop> 
+let mapleader="\\"
+let maplocalleader="\\"
+
 
 " Display the number of matches for the last search
 nmap <leader># :%s:<C-R>/::gn<cr>
 
 nmap L <End>
 nmap H <Home>
-" Restore case-sensitivity for jumping to tags (set ic disables it)
-" map <silent> <C-]> :set noic<cr>g<C-]><silent>:set ic<cr>
-map ^[[A <up>
-map ^[[B <down>
-map ^[[C <right>
-map ^[[D <left>
-" }}} " Line Wrap {{{
-"
-" deal with <C-S>
+
+" No ex-mode
+nnoremap Q <Nop>
+nnoremap q <Nop>
 
 set backspace=indent,eol,start  "bs:    allows you to backspace over the listed character types
 set linebreak                   "lbr:   causes vim to not wrap text in the middle of a word
 set wrap                        "wrap:  wraps lines by default
 " Toggle line wrapping in normal mode:
-nmap <silent> <C-P> :set nowrap!<cr>:set nowrap?<cr>
+" nmap <silent> <C-P> :set nowrap!<cr>:set nowrap?<cr>
 
 set showmatch                   "sm:    flashes matching brackets or parentheses
 set nobackup                    "bk:    does not write a persistent backup file of an edited file
@@ -66,8 +62,26 @@ set lazyredraw                  "lz:    will not redraw the screen while running
 set pastetoggle=<F9>            "pt:    useful so auto-indenting doesn't mess up code when pasting
 set colorcolumn=80
 
-" Change directory to the path of the current file
-map <leader>cd :cd %:p:h<cr>
+set backspace=indent,eol,start
+
+set ruler
+set showcmd
+"screen setting
+inoremap jj <ESC>
+" vnoremap jj <ESC>
+inoremap <C-s> <ESC>:w<cr>a
+nnoremap <C-s> :w<cr>
+" inoremap <C-k> <ESC>:shell<cr>
+" nnoremap <C-k> :shell<cr>
+
+" disable arrowkeys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+nnoremap K gt
+nnoremap J gT
 
 syntax on
 
@@ -118,8 +132,9 @@ Plugin 'AutoClose'
 Plugin 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 " Gif config
-map  <leader>/ <Plug>(easymotion-sn)
-omap <leader>/ <Plug>(easymotion-tn)
+nmap  / <Plug>(easymotion-sn)
+" map  <leader>/ <Plug>(easymotion-sn)
+" omap <leader>/ <Plug>(easymotion-tn)
 " map  n <Plug>(easymotion-next)
 " map  N <Plug>(easymotion-prev)
 
@@ -135,33 +150,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_exclude_preview = 1
 set laststatus=2
 Bundle 'paranoida/vim-airlineish'
 let g:airline_theme = 'bubblegum'
 " let g:airline_theme = 'airlineish'
 " let g:airline_theme = 'molokai'
-
-set backspace=indent,eol,start
-
-set ruler
-set showcmd
-"screen setting
-inoremap jj <ESC>
-" vnoremap jj <ESC>
-inoremap <C-s> <ESC>:w<cr>a
-nnoremap <C-s> :w<cr>
-" inoremap <C-k> <ESC>:shell<cr>
-" nnoremap <C-k> :shell<cr>
-
-" disable arrowkeys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-nnoremap K gt
-nnoremap J gT
 
 autocmd InsertEnter,InsertLeave * set cul!
 Plugin 'flazz/vim-colorschemes'
@@ -170,23 +163,22 @@ Plugin 'kien/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_prompt_mappings = {
-  \ 'AcceptSelection("e")': [],
-  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
-  \ }
+\ 'AcceptSelection("e")': [],
+\ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+\ }
 " nmap <leader>bb :CtrlPBuffer<cr>
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-let NERDTreeDirArrows=0
-map <C-n> :NERDTreeTabsToggle<CR>
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'jistr/vim-nerdtree-tabs'
+" let NERDTreeDirArrows=0
 " map <C-n> :NERDTreeToggle<CR>
 " Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
-Plugin 'jlanzarotta/bufexplorer'
-let g:bufExplorerFindActive=1        " Go to active window.
-nmap  <leader>be <Nop>
-nmap  <leader>bs <Nop>
-" nmap  <leader>bv <Nop>
-noremap <silent> <leader>bb :BufExplorerHorizontalSplit<CR>
+" Plugin 'jlanzarotta/bufexplorer'
+" let g:bufExplorerFindActive=1        " Go to active window.
+" nmap  <leader>be <Nop>
+" nmap  <leader>bs <Nop>
+" " nmap  <leader>bv <Nop>
+" noremap <silent> <leader>bb :BufExplorerHorizontalSplit<CR>
 
 Plugin 'tomtom/tcomment_vim'
 Plugin 'myusuf3/numbers.vim'
@@ -195,6 +187,13 @@ Plugin 'myusuf3/numbers.vim'
 " Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'sjl/splice.vim'
+Plugin 'vim-pandoc/vim-pandoc'
+let g:pandoc#modules#disabled = ["folding"]
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-pandoc/vim-pandoc-after'
+let g:pandoc#after#modules#enabled = ["supertab", "unite.vim"]
+
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rsi'
 " Plugin 'tpope/vim-dispatch'
@@ -204,23 +203,23 @@ Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'chrisbra/changesPlugin'
 Plugin 'kien/rainbow_parentheses.vim'
 let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
+\ ['brown',       'RoyalBlue3'],
+\ ['Darkblue',    'SeaGreen3'],
+\ ['darkgray',    'DarkOrchid3'],
+\ ['darkgreen',   'firebrick3'],
+\ ['darkcyan',    'RoyalBlue3'],
+\ ['darkred',     'SeaGreen3'],
+\ ['darkmagenta', 'DarkOrchid3'],
+\ ['brown',       'firebrick3'],
+\ ['gray',        'RoyalBlue3'],
+\ ['black',       'SeaGreen3'],
+\ ['darkmagenta', 'DarkOrchid3'],
+\ ['Darkblue',    'firebrick3'],
+\ ['darkgreen',   'RoyalBlue3'],
+\ ['darkcyan',    'SeaGreen3'],
+\ ['darkred',     'DarkOrchid3'],
+\ ['red',         'firebrick3'],
+\ ]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 au VimEnter * RainbowParenthesesToggle
@@ -232,6 +231,8 @@ Plugin 'szw/vim-ctrlspace'
 " inoremap <leader>s <ESC>:CtrlSpace l<cr>
 " nnoremap <leader>s :CtrlSpace l<cr>
 let g:ctrlspace_use_tabline = 1
+let g:airline_exclude_preview = 1
+" set showtabline=0
 
 set hidden
 " Plugin 'kana/vim-textobj-entire'
@@ -248,15 +249,26 @@ set hidden
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-fun! RangerChooser()
+fun! RangerChooser(type)
     exec "silent !ranger --choosefiles=/tmp/chosenfile " . expand("%:p:h")
     if filereadable('/tmp/chosenfile')
-        exec 'Etabs ' . system('cat /tmp/chosenfile|tr "\n" " "')
-        " call system('rm /tmp/chosenfile')
+        if a:type == 1
+            exec 'Ewindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
+        elseif a:type == 2
+            exec 'Evwindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
+        elseif a:type == 3
+            exec 'edit ' . system('cat /tmp/chosenfile|tr "\n" " "')
+        else
+            exec 'Etabs ' . system('cat /tmp/chosenfile|tr "\n" " "')
+        endif
+        call system('rm /tmp/chosenfile')
     endif
     redraw!
 endfun
-map <leader>r :call RangerChooser()<CR>
+map <leader>rr :call RangerChooser(4)<CR>
+map <leader>rv :call RangerChooser(2)<CR>
+map <leader>rs :call RangerChooser(1)<CR>
+map <leader>rb :call RangerChooser(3)<CR>
 " Enable add multiple files to edit
 command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
 command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
@@ -273,3 +285,4 @@ function! s:ETW(what, ...)
         endif
     endfor
 endfunction
+
