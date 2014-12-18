@@ -31,3 +31,5 @@
     last = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short --max-count=1
     ready = diff --cached
     amend = commit --amend
+[push]
+    default = simple
