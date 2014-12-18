@@ -192,7 +192,7 @@ Plugin 'vim-pandoc/vim-pandoc'
 let g:pandoc#modules#disabled = ["folding"]
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-pandoc-after'
-let g:pandoc#after#modules#enabled = ["supertab", "unite.vim"]
+" let g:pandoc#after#modules#enabled = ["supertab", "unite.vim"]
 
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rsi'
