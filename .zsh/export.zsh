@@ -7,3 +7,6 @@ export EDITOR='vim'
 export VISUAL='vim'
 CDPATH=:$HOME
 export CDPATH
+# by default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+# # we take out the slash, period, angle brackets, dash here.
+export WORDCHARS='*?_[]~=&;!#$%^(){}'
