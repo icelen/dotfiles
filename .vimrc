@@ -228,8 +228,8 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 Plugin 'szw/vim-ctrlspace'
-" inoremap <leader>s <ESC>:CtrlSpace l<cr>
-" nnoremap <leader>s :CtrlSpace l<cr>
+" inoremap <C-Space> <ESC>:CtrlSpace<cr>
+" nnoremap <C-Space> :CtrlSpace<cr>
 let g:ctrlspace_use_tabline = 1
 let g:airline_exclude_preview = 1
 " set showtabline=0
