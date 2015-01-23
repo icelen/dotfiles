@@ -1,8 +1,8 @@
 [user]
     name = Lei Cen
     email = cenlei2000@gmail.com
-[credential]
-	helper = cache
+; [credential]
+; 	helper = cache
 [core]
     excludesfile = ~/.gitignore_global
 	autocrlf = input
