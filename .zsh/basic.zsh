@@ -6,6 +6,7 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(vi-mode python zsh-syntax-highlighting cp screen vundle web-search command-not-found history-substring-search osx brew)
 
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 
 # User configuration
 DEFAULT_USER=icelen
