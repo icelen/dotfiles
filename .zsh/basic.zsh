@@ -4,7 +4,7 @@ ZSH_THEME="my2"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(vi-mode python zsh-syntax-highlighting cp screen vundle web-search command-not-found history-substring-search)
+plugins=(vi-mode python zsh-syntax-highlighting cp screen vundle web-search command-not-found history-substring-search osx brew)
 
 
 # User configuration
