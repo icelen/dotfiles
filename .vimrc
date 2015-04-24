@@ -238,7 +238,22 @@ let g:ctrlspace_use_tabline = 1
 let g:airline_exclude_preview = 1
 " set showtabline=0
 
+
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+" let g:LatexBox_latexmk_async=1
+let g:LatexBox_latexmk_preview_continuously=1
+" let g:LatexBox_latexmk_options="-f -outdir='Output'"
+let g:LatexBox_latexmk_options="-f -outdir='Output -pdflatex='pdflatex -synctex=1 \%O \%S'"
+" let g:LatexBox_viewer="open -a Skim"
+" let g:LatexBox_viewer="/Applications/Skim.app/Contents/MacOS/Skim"
+let g:LatexBox_build_dir="Output"
+let b:build_dir="Output"
+" map <silent> <Leader>ls :silent
+"             \ !/Applications/Skim.app/Contents/SharedSupport/displayline
+"             \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
+"             \ "%:p" <CR>
 set hidden
+
 " Plugin 'kana/vim-textobj-entire'
 " Plugin 'edkolev/tmuxline.vim'
 " " git repos on your local machine (i.e. when working on your own plugin)
@@ -270,9 +285,9 @@ fun! RangerChooser(type)
     redraw!
 endfun
 map <leader>rr :call RangerChooser(4)<CR>
-map <leader>rv :call RangerChooser(2)<CR>
-map <leader>rs :call RangerChooser(1)<CR>
-map <leader>rb :call RangerChooser(3)<CR>
+" map <leader>rv :call RangerChooser(2)<CR>
+" map <leader>rs :call RangerChooser(1)<CR>
+" map <leader>rb :call RangerChooser(3)<CR>
 " Enable add multiple files to edit
 command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
 command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)

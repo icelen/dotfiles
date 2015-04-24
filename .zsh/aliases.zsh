@@ -1,6 +1,7 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias rcd='ranger-cd'
 alias 'bk=cd $OLDPWD'
 alias by='byobu-tmux'
 # enable color support of ls and also add handy aliases
