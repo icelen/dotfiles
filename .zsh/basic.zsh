@@ -5,8 +5,6 @@ ZSH_THEME="my"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(vi-mode python zsh-syntax-highlighting cp screen tmux colorize z vundle web-search command-not-found osx brew)
-
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 
 # User configuration
