@@ -1,5 +1,6 @@
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="my"
+# ZSH_THEME="robbyrussell"
 
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
