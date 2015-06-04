@@ -1,5 +1,5 @@
 
-ZSH_THEME="my2"
+ZSH_THEME="robbyrussell"
 
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
@@ -30,3 +30,6 @@ esac
 force_color_prompt=yes
 set -o vi
 stty -ixon
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
