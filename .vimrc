@@ -169,6 +169,14 @@ let g:ctrlp_prompt_mappings = {
 \ 'AcceptSelection("e")': [],
 \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
 \ }
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_max_depth = 40
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 " nmap <leader>bb :CtrlPBuffer<cr>
 " Plugin 'scrooloose/nerdtree'
 " Plugin 'jistr/vim-nerdtree-tabs'
@@ -236,7 +244,7 @@ Plugin 'szw/vim-ctrlspace'
 let g:ctrlspace_use_tabline = 1
 let g:airline_exclude_preview = 1
 " set showtabline=0
-
+Plugin 'derekwyatt/vim-scala'
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " let g:LatexBox_latexmk_async=1

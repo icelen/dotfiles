@@ -5,16 +5,15 @@ ZSH_THEME="my"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
+plugins=(vi-mode python zsh-syntax-highlighting history-substring-search cp screen tmux colorize fasd vundle web-search command-not-found osx brew)
 
 # User configuration
-DEFAULT_USER=icelen
+DEFAULT_USER=lcen
 autoload -U compinit
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 autoload select-word-style
 select-word-style shell
-# PS1='[%T] %n@%m:%~# '
 REPORTTIME=10
 
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -29,6 +28,3 @@ esac
 force_color_prompt=yes
 set -o vi
 stty -ixon
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8

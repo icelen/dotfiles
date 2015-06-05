@@ -65,5 +65,3 @@ ranger-cd() {
     ls
 }
 
-alias cdr='ranger-cd'
-
