@@ -260,6 +260,7 @@ let b:build_dir="Output"
 "             \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
 "             \ "%:p" <CR>
 set hidden
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Plugin 'kana/vim-textobj-entire'
 " Plugin 'edkolev/tmuxline.vim'

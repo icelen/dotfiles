@@ -25,7 +25,6 @@ alias lc='ls -l | wc -l'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 
-alias =clear
 alias matlabno="matlab -nodesktop -nosplash"
 alias python="ipython"
 alias shortcut='gnome-desktop-item-edit ~/Desktop/ --create-new'
@@ -37,7 +36,7 @@ alias -s py=vim
 alias -s m=vim
 alias -s txt=vim
 alias -s log=vim
-alias v='f -e vim'
+# alias v='f -e vim'
 # alias a='fasd -a'        # any
 # alias s='fasd -si'       # show / search / select
 # alias d='fasd -d'        # directory
@@ -46,6 +45,7 @@ alias v='f -e vim'
 # alias sf='fasd -sif'     # interactive file selection
 # alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 # alias zz='fasd_cd -d -i'
+alias vs='fasd -si -e vim'
 # servers
 alias chicago="ssh lcen@chicago.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias km="ssh lcen@kunming.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
