@@ -7,11 +7,10 @@ set t_ut=
 " let g:monokai_termtrans=1
 " colors google
 syntax enable
-set background=dark
-colorscheme solarized
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-let g:rehash256 = 1
+colorscheme solarized
+set background=dark
 
 " if &term =~ '^screen'
 "     execute "set t_kP=\e[5;*~"

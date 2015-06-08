@@ -1,10 +1,9 @@
 
-ZSH_THEME="my2"
+ZSH_THEME="my"
+# ZSH_THEME="robbyrussell"
 
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
-
-plugins=(vi-mode python zsh-syntax-highlighting cp screen tmux colorize z vundle web-search command-not-found osx brew)
 
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 
@@ -30,3 +29,6 @@ esac
 force_color_prompt=yes
 set -o vi
 stty -ixon
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
