@@ -252,6 +252,8 @@ let b:build_dir="Output"
 "             \ !/Applications/Skim.app/Contents/SharedSupport/displayline
 "             \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
 "             \ "%:p" <CR>
+"             
+Plugin 'derekwyatt/vim-scala'
 set hidden
 
 " Plugin 'kana/vim-textobj-entire'
