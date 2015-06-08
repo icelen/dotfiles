@@ -94,7 +94,7 @@ filetype indent on
 filetype plugin on
 set nocompatible              " be iMproved
 set incsearch                   "is:    automatically begins searching as you type
-set ignorecase                  "ic:    ignores case when pattern matching
+" set ignorecase                  "ic:    ignores case when pattern matching
 set smartcase                   "scs:   ignores ignorecase when pattern contains uppercase characters
 set hlsearch
 filetype off                  " required!
@@ -169,6 +169,25 @@ let g:ctrlp_prompt_mappings = {
 \ 'AcceptSelection("e")': [],
 \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
 \ }
+let g:ctrlp_max_files=0
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_max_depth = 40
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+Plugin 'FelikZ/ctrlp-py-matcher'
 " nmap <leader>bb :CtrlPBuffer<cr>
 " Plugin 'scrooloose/nerdtree'
 " Plugin 'jistr/vim-nerdtree-tabs'
@@ -236,7 +255,7 @@ Plugin 'szw/vim-ctrlspace'
 let g:ctrlspace_use_tabline = 1
 let g:airline_exclude_preview = 1
 " set showtabline=0
-
+Plugin 'derekwyatt/vim-scala'
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " let g:LatexBox_latexmk_async=1
@@ -254,6 +273,7 @@ let b:build_dir="Output"
 "             
 Plugin 'derekwyatt/vim-scala'
 set hidden
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Plugin 'kana/vim-textobj-entire'
 " Plugin 'edkolev/tmuxline.vim'
