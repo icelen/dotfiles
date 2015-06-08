@@ -255,7 +255,6 @@ Plugin 'szw/vim-ctrlspace'
 let g:ctrlspace_use_tabline = 1
 let g:airline_exclude_preview = 1
 " set showtabline=0
-Plugin 'derekwyatt/vim-scala'
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " let g:LatexBox_latexmk_async=1
