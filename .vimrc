@@ -146,7 +146,12 @@ nmap  / <Plug>(easymotion-sn)
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/unite.vim'
 
-"
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+
+nnoremap <leader>t :CtrlPTag<cr>
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 "vim-airline
 Bundle 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
