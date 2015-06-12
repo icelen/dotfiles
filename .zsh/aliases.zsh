@@ -1,6 +1,8 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 alias rcd='ranger-cd'
 alias bk='cd $OLDPWD'
 alias by='byobu-tmux'
@@ -45,7 +47,7 @@ alias -s log=vim
 # alias sf='fasd -sif'     # interactive file selection
 # alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 # alias zz='fasd_cd -d -i'
-alias vs='fasd -si -e vim'
+alias fe='vim -p $(fzf -m)'
 # servers
 alias chicago="ssh lcen@chicago.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias km="ssh lcen@kunming.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"

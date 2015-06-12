@@ -20,7 +20,7 @@ ex() {
           *.7z) 7z x $1;;
           *.dmg) hdiutul mount $1;; # mount OS X disk images
           *) echo "'$1' cannot be extracted via >ex<";;
-    esac
+      esac
     else
         echo "'$1' is not a valid file"
     fi
@@ -54,6 +54,15 @@ path() {
            print }"
 }
 
+gitroot() {
+    local rootdir=$(git root 2>/dev/null)
+    if [[ -d "$rootdir" ]] ; then
+        echo $rootdir 
+    else
+        echo .
+    fi
+}
+
 ranger-cd() {
     tempfile='/tmp/chosendir'
     ranger --choosedir="$tempfile" "${@:-$(pwd)}" < $TTY
@@ -65,3 +74,28 @@ ranger-cd() {
     ls
 }
 
+# fzf related functions
+# fh - repeat history
+fh() {
+    print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s -x --tac | sed 's/ *[0-9]* *//')
+}
+
+# jump using z
+unalias z
+z() {
+    if [[ -z "$*" ]]; then
+        cd "$(fasd_cd -d -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf)"
+    else
+        fasd_cd -d "$@"
+    fi
+}
+fd() {
+  local dir
+    dir=$(find ${1:-*} -path '*/\.*' -prune \
+                          -o -type d -print 2> /dev/null | fzf +m) &&
+                        cd "$dir"
+}
+fda() {
+  local dir
+    dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}

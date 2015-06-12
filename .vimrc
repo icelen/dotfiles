@@ -20,11 +20,13 @@ set background=dark
 "     execute "set <xRight>=\e[1;*C"
 "     execute "set <xLeft>=\e[1;*D"
 " endif
+"
+"
+set clipboard=unnamed
 set t_ut=
 set relativenumber 
 set number  
 set tabstop=8
-
 set modeline
 set shiftwidth=4
 set smartindent
@@ -106,7 +108,6 @@ call vundle#begin()
 " Plugin 'fo60213/matlab-snippets'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/matchit'
-" Plugin 'xolox/vim-misc'
 " Plugin 'xolox/vim-session'
 " set sessionoptions-=help
 " set sessionoptions-=options
@@ -144,12 +145,12 @@ nmap  / <Plug>(easymotion-sn)
 
 " Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neocomplcache.vim'
-Plugin 'Shougo/unite.vim'
+" Plugin 'Shougo/unite.vim'
 
 Plugin 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
 
-nnoremap <leader>t :CtrlPTag<cr>
+" nnoremap <leader>t :CtrlPTag<cr>
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 "vim-airline
@@ -167,32 +168,34 @@ let g:airline_theme = 'bubblegum'
 autocmd InsertEnter,InsertLeave * set cul!
 Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_prompt_mappings = {
-\ 'AcceptSelection("e")': [],
-\ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
-\ }
-let g:ctrlp_max_files=0
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_depth = 40
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ -g ""'
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-Plugin 'FelikZ/ctrlp-py-matcher'
+
+" ctrlp
+" Plugin 'kien/ctrlp.vim'
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_prompt_mappings = {
+" \ 'AcceptSelection("e")': [],
+" \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+" \ }
+" let g:ctrlp_max_files=0
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_max_depth = 40
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"   \ 'file': '\v\.(exe|so|dll)$',
+"   \ 'link': 'some_bad_symbolic_links',
+"   \ }
+" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+"       \ --ignore .git
+"       \ --ignore .svn
+"       \ --ignore .hg
+"       \ --ignore .DS_Store
+"       \ --ignore "**/*.pyc"
+"       \ -g ""'
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" Plugin 'FelikZ/ctrlp-py-matcher'
 " nmap <leader>bb :CtrlPBuffer<cr>
 " Plugin 'scrooloose/nerdtree'
 " Plugin 'jistr/vim-nerdtree-tabs'
@@ -276,6 +279,7 @@ let b:build_dir="Output"
 "             \ "%:p" <CR>
 "             
 Plugin 'derekwyatt/vim-scala'
+Plugin 'solarnz/thrift.vim'
 set hidden
 Plugin 'christoomey/vim-tmux-navigator'
 
@@ -293,6 +297,10 @@ Plugin 'christoomey/vim-tmux-navigator'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" fzf
+set rtp+=~/.fzf
+
+" ranger
 fun! RangerChooser(type)
     exec "silent !ranger --choosefiles=/tmp/chosenfile " . expand("%:p:h")
     if filereadable('/tmp/chosenfile')
@@ -315,8 +323,8 @@ map <leader>rr :call RangerChooser(4)<CR>
 " map <leader>rb :call RangerChooser(3)<CR>
 " Enable add multiple files to edit
 command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
-command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
-command! -complete=file -nargs=+ Evwindows call s:ETW('vnew', <f-args>)
+" command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
+" command! -complete=file -nargs=+ Evwindows call s:ETW('vnew', <f-args>)
 function! s:ETW(what, ...)
     for f1 in a:000
         let files = glob(f1)
@@ -330,3 +338,31 @@ function! s:ETW(what, ...)
     endfor
 endfunction
 
+function! BufGet()
+    return map(getline(1, '$'), "printf('%5d  %s', v:key + 1, v:val)")
+endfunction
+
+function! LineOpen(e)
+    execute 'normal! '. matchstr(a:e, '[0-9]\+'). 'G'
+endfunction
+
+function! Gitroot()
+    return system('git root 2>/dev/null')
+endfunction
+
+function! FZFGit()
+    exec 'FZF ' . Gitroot()
+endfunction
+
+nnoremap <silent> <C-f> :call fzf#run({
+            \   'source':      BufGet(),
+            \   'sink':        function('LineOpen'),
+            \   'options':     '+m',
+            \   'tmux_height': '40%'
+            \ })<CR>
+nnoremap <silent> <leader>f :call fzf#run({
+            \   'dir':         Gitroot(),
+            \   'sink':        'tabe',
+            \   'options':     '-m',
+            \ })<CR>
+" nnoremap <silent> <leader>f :call FZFGit()<CR>
