@@ -49,6 +49,7 @@ alias -s log=vim
 # alias zz='fasd_cd -d -i'
 alias fe='vim -p $(fzf -m)'
 # servers
+alias nest="ssh lcen@hadoopnest1"
 alias chicago="ssh lcen@chicago.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias km="ssh lcen@kunming.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias nb="ssh lcen@ningbo.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"

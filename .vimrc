@@ -1,6 +1,12 @@
 set encoding=utf-8
 set t_Co=256
 set t_ut=
+set shortmess=a
+" set cmdheight=2
+" auto load file in case of change outside of Vim
+" set autoread
+au FocusGained,BufEnter * :silent! !
+au FocusLost,WinLeave * :silent! w
 " colors Monokai
 " let g:monokai_original = 1
 " let g:monokai_termcolors=256
@@ -51,7 +57,7 @@ nnoremap q <Nop>
 
 set backspace=indent,eol,start  "bs:    allows you to backspace over the listed character types
 set linebreak                   "lbr:   causes vim to not wrap text in the middle of a word
-set wrap                        "wrap:  wraps lines by default
+" set wrap                        "wrap:  wraps lines by default
 " Toggle line wrapping in normal mode:
 " nmap <silent> <C-P> :set nowrap!<cr>:set nowrap?<cr>
 
@@ -76,14 +82,14 @@ nnoremap <C-s> :w<cr>
 " nnoremap <C-k> :shell<cr>
 
 " disable arrowkeys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
+" noremap <Up> <Nop>
+" noremap <Down> <Nop>
+" noremap <Left> <Nop>
+" noremap <Right> <Nop>
+" inoremap <Up> <Nop>
+" inoremap <Down> <Nop>
+" inoremap <Left> <Nop>
+" inoremap <Right> <Nop>
 
 nnoremap K gt
 nnoremap J gT
@@ -136,7 +142,7 @@ Plugin 'AutoClose'
 Plugin 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 " Gif config
-nmap  / <Plug>(easymotion-sn)
+" nmap  / <Plug>(easymotion-sn)
 " map  <leader>/ <Plug>(easymotion-sn)
 " omap <leader>/ <Plug>(easymotion-tn)
 " map  n <Plug>(easymotion-next)
@@ -215,19 +221,20 @@ Plugin 'myusuf3/numbers.vim'
 " Plugin 'Shougo/vimproc.vim'
 " Plugin 'Shougo/vimshell.vim'
 " Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'sjl/splice.vim'
+" Plugin 'sjl/splice.vim'
 Plugin 'vim-pandoc/vim-pandoc'
 let g:pandoc#modules#disabled = ["folding"]
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-pandoc-after'
 " let g:pandoc#after#modules#enabled = ["supertab", "unite.vim"]
 
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+autocmd BufReadPost fugitive://* set bufhidden=delete
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rsi'
-" Plugin 'tpope/vim-dispatch'
-" Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'repmo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'chrisbra/changesPlugin'
@@ -317,6 +324,9 @@ fun! RangerChooser(type)
     endif
     redraw!
 endfun
+command! -nargs=1 Silent
+\ | execute ':silent '.<q-args>
+\ | execute ':redraw!'
 map <leader>rr :call RangerChooser(4)<CR>
 " map <leader>rv :call RangerChooser(2)<CR>
 " map <leader>rs :call RangerChooser(1)<CR>
@@ -350,10 +360,11 @@ function! Gitroot()
     return system('git root 2>/dev/null')
 endfunction
 
-function! FZFGit()
-    exec 'FZF ' . Gitroot()
+function! OpenInIntelliJ()
+    execute "!/Applications/IntelliJ\\ IDEA\\ 14.app/Contents/MacOS/idea ~/workspace/source/science/.pants.d/idea/idea/TwitterIdeaGen_idea/project --line " . line('.') . " " . expand('%:p') . "&>/dev/null"
 endfunction
 
+nnoremap <C-i> :Silent call OpenInIntelliJ()<CR>
 nnoremap <silent> <C-f> :call fzf#run({
             \   'source':      BufGet(),
             \   'sink':        function('LineOpen'),
@@ -366,3 +377,8 @@ nnoremap <silent> <leader>f :call fzf#run({
             \   'options':     '-m',
             \ })<CR>
 " nnoremap <silent> <leader>f :call FZFGit()<CR>
+command! FZFMru call fzf#run({
+            \'source': v:oldfiles,
+            \'sink' : 'e ',
+            \'options' : '-m',
+            \})

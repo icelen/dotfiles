@@ -26,5 +26,6 @@ case "$TERM" in
 esac
 
 force_color_prompt=yes
-set -o vi
-stty -ixon
+# set -o vi
+# stty -ixon
+export KEYTIMEOUT=20
