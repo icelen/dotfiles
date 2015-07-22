@@ -81,7 +81,7 @@ fh() {
 }
 
 # jump using z
-# unalias z
+unalias z
 z() {
     if [[ -z "$*" ]]; then
         cd "$(fasd_cd -d -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf)"
@@ -89,13 +89,33 @@ z() {
         fasd_cd -d "$@"
     fi
 }
+
 fd() {
   local dir
     dir=$(find ${1:-*} -path '*/\.*' -prune \
                           -o -type d -print 2> /dev/null | fzf +m) &&
                         cd "$dir"
 }
-fda() {
-  local dir
-    dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+fbr() {
+  local branches branch
+  branches=$(git branch) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //")
+}
+# fda() {
+#   local dir
+#     dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+# }
+# fshow - git commit browser
+fshow() {
+  local out sha q
+  while out=$(
+      git log --graph --color=always \
+          --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+      fzf --ansi --multi --no-sort --reverse --query="$q" --print-query); do
+    q=$(head -1 <<< "$out")
+    while read sha; do
+      git show --color=always $sha | less -R
+    done < <(sed '1d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
+  done
 }

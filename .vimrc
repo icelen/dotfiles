@@ -50,7 +50,8 @@ nmap <leader># :%s:<C-R>/::gn<cr>
 
 nmap L <End>
 nmap H <Home>
-
+" search visually selected
+vnoremap // y/<C-R>"<CR>
 " No ex-mode
 nnoremap Q <Nop>
 nnoremap q <Nop>
@@ -265,8 +266,8 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 Plugin 'szw/vim-ctrlspace'
-" inoremap <C-Space> <ESC>:CtrlSpace<cr>
-" nnoremap <C-Space> :CtrlSpace<cr>
+inoremap <C-Space> <ESC>:CtrlSpace<cr>
+nnoremap <C-Space> :CtrlSpace<cr>
 let g:ctrlspace_use_tabline = 1
 let g:airline_exclude_preview = 1
 " set showtabline=0
@@ -327,7 +328,7 @@ endfun
 command! -nargs=1 Silent
 \ | execute ':silent '.<q-args>
 \ | execute ':redraw!'
-map <leader>rr :call RangerChooser(4)<CR>
+map <leader><leader>r :call RangerChooser(4)<CR>
 " map <leader>rv :call RangerChooser(2)<CR>
 " map <leader>rs :call RangerChooser(1)<CR>
 " map <leader>rb :call RangerChooser(3)<CR>
@@ -364,21 +365,39 @@ function! OpenInIntelliJ()
     execute "!/Applications/IntelliJ\\ IDEA\\ 14.app/Contents/MacOS/idea ~/workspace/source/science/.pants.d/idea/idea/TwitterIdeaGen_idea/project --line " . line('.') . " " . expand('%:p') . "&>/dev/null"
 endfunction
 
-nnoremap <C-i> :Silent call OpenInIntelliJ()<CR>
+function! GetAppIDs()
+    execute 'g!/<td>\d\+<\/td>/d'
+    execute '%s/^\s\+<td>\(\d\+\)<\/td>/\1/g'
+    execute '%y+'
+endfunction
+
+nnoremap <leader><leader>i :Silent call OpenInIntelliJ()<CR>
 nnoremap <silent> <C-f> :call fzf#run({
             \   'source':      BufGet(),
             \   'sink':        function('LineOpen'),
             \   'options':     '+m',
             \   'tmux_height': '40%'
             \ })<CR>
-nnoremap <silent> <leader>f :call fzf#run({
+nnoremap <silent> <leader><leader>f :call fzf#run({
             \   'dir':         Gitroot(),
             \   'sink':        'tabe',
             \   'options':     '-m',
             \ })<CR>
 " nnoremap <silent> <leader>f :call FZFGit()<CR>
-command! FZFMru call fzf#run({
+nnoremap <silent> <leader><leader>m :call fzf#run({
             \'source': v:oldfiles,
             \'sink' : 'e ',
             \'options' : '-m',
-            \})
+            \})<CR>
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
