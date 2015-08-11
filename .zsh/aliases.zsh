@@ -60,4 +60,3 @@ alias abusenest="ssh -R 22288:localhost:22 -t abuse@hadoopnest1"
 # trash
 # alias rm=trash
 # alias remove='/bin/rm'
-alias vnest='vim scp://lcen@hadoopnest1/'

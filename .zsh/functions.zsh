@@ -119,3 +119,10 @@ fshow() {
     done < <(sed '1d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
   done
 }
+vnest() {
+    allButLast=${@:1:${#}-1}
+    # echo $allButLast
+    last=${@[$#]}
+    # echo $last
+    vim $allButLast scp://lcen@hadoopnest1/$last
+}
