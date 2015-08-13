@@ -1,6 +1,8 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 alias rcd='ranger-cd'
 alias bk='cd $OLDPWD'
 alias by='byobu-tmux'
@@ -45,14 +47,16 @@ alias -s log=vim
 # alias sf='fasd -sif'     # interactive file selection
 # alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 # alias zz='fasd_cd -d -i'
-alias vs='fasd -si -e vim'
+alias fe='vim -p $(fzf -m)'
 # servers
 alias chicago="ssh lcen@chicago.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias km="ssh lcen@kunming.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias nb="ssh lcen@ningbo.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias sj="ssh lcen@sanjose.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias mc18="ssh lcen@mc18.cs.purdue.edu -t 'zsh'"
+alias nest="ssh -R 22088:localhost:22 lcen@hadoopnest1"
+alias abusenest="ssh -R 22288:localhost:22 -t abuse@hadoopnest1"
 
 # trash
-alias rm=trash
-alias remove='/bin/rm'
+# alias rm=trash
+# alias remove='/bin/rm'

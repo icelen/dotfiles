@@ -5,7 +5,7 @@ ZSH_THEME="my"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(vi-mode python zsh-syntax-highlighting history-substring-search cp screen tmux colorize fasd vundle web-search command-not-found osx brew)
+plugins=(vi-mode python zsh-syntax-highlighting history-substring-search cp screen tmux fasd colorize vundle web-search command-not-found osx brew)
 
 # User configuration
 DEFAULT_USER=lcen
@@ -26,5 +26,6 @@ case "$TERM" in
 esac
 
 force_color_prompt=yes
-set -o vi
-stty -ixon
+# set -o vi
+# stty -ixon
+export KEYTIMEOUT=20
