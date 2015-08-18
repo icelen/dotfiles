@@ -7,5 +7,6 @@ source ~/.zsh/bindkeys.zsh
 source ~/.zsh/functions.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/history.zsh
+source ~/.zsh/k.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

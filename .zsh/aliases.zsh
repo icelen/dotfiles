@@ -56,6 +56,7 @@ alias sj="ssh lcen@sanjose.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
 alias mc18="ssh lcen@mc18.cs.purdue.edu -t 'zsh'"
 alias nest="ssh -R 22088:localhost:22 lcen@hadoopnest1"
 alias abusenest="ssh -R 22288:localhost:22 -t abuse@hadoopnest1"
+alias vnote='vim -c Geeknote'
 
 # trash
 # alias rm=trash

@@ -290,6 +290,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'solarnz/thrift.vim'
 set hidden
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'neilagabriel/vim-geeknote'
 
 " Plugin 'kana/vim-textobj-entire'
 " Plugin 'edkolev/tmuxline.vim'
