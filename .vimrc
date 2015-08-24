@@ -12,6 +12,7 @@ au FocusLost,WinLeave * :silent! w
 " let g:monokai_termcolors=256
 " let g:monokai_termtrans=1
 " colors google
+set clipboard=unnamed
 syntax enable
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
@@ -28,7 +29,6 @@ set background=dark
 " endif
 "
 "
-set clipboard=unnamed
 set t_ut=
 set relativenumber 
 set number  
@@ -152,7 +152,7 @@ let g:EasyMotion_smartcase = 1
 
 " Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neocomplcache.vim'
-" Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/unite.vim'
 
 Plugin 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
@@ -225,9 +225,10 @@ Plugin 'myusuf3/numbers.vim'
 " Plugin 'sjl/splice.vim'
 Plugin 'vim-pandoc/vim-pandoc'
 let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#spell#enabled = 1
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-pandoc-after'
-" let g:pandoc#after#modules#enabled = ["supertab", "unite.vim"]
+let g:pandoc#after#modules#enabled = ["supertab"]
 
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
@@ -402,3 +403,7 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
+" command! MD execute "silent !open -a Marked\\ 2 %"
+command! -nargs=0 MD
+\ | execute ":silent !open -a Marked\\ 2 %"
+\ | execute ':redraw!'
