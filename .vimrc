@@ -259,6 +259,30 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'neilagabriel/vim-geeknote'
 Plugin 'danro/rename.vim'
 Plugin 'terryma/vim-expand-region'
+Plugin 'mhinz/vim-startify'
+let g:startify_bookmarks = [ '~/.vimrc' ]
+let g:startify_enable_special         = 0
+let g:startify_files_number           = 8
+let g:startify_relative_path          = 1
+let g:startify_change_to_dir          = 1
+let g:startify_session_autoload       = 1
+let g:startify_session_persistence    = 1
+let g:startify_session_delete_buffers = 1
+let g:startify_custom_footer =
+            \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
+
+let g:startify_list_order = [
+            \ ['   LRU:'],
+            \ 'files',
+            \ ['   LRU within this dir:'],
+            \ 'dir',
+            \ ['   Sessions:'],
+            \ 'sessions',
+            \ ['   Bookmarks:'],
+            \ 'bookmarks',
+            \ ]
+let g:startify_custom_header =
+            \ map(split(system('cowsay Hi Icelen!'), '\n'), '"   ". v:val') + ['']
 
 
 " All of your Plugins must be added before the following line
