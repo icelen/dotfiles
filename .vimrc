@@ -5,8 +5,8 @@ set shortmess=a
 " set cmdheight=2
 " auto load file in case of change outside of Vim
 " set autoread
-au FocusGained,BufEnter * :silent! !
-au FocusLost,WinLeave * :silent! w
+" au FocusGained,BufEnter * :silent! !
+" au FocusLost,WinLeave * :silent! w
 " colors Monokai
 " let g:monokai_original = 1
 " let g:monokai_termcolors=256
@@ -41,6 +41,7 @@ set expandtab
 set softtabstop=4
 set textwidth=120
 set autoindent
+set hidden
 let mapleader="\\"
 let maplocalleader="\\"
 
@@ -49,7 +50,7 @@ let maplocalleader="\\"
 nmap <leader># :%s:<C-R>/::gn<cr>
 
 nmap L <End>
-nmap H <Home>
+nmap H ^
 " search visually selected
 vnoremap // y/<C-R>"<CR>
 " No ex-mode
@@ -77,8 +78,8 @@ set showcmd
 "screen setting
 inoremap jj <ESC>
 " vnoremap jj <ESC>
-inoremap <C-s> <ESC>:w<cr>a
-nnoremap <C-s> :w<cr>
+" inoremap <C-s> <ESC>:w<cr>a
+" nnoremap <C-s> :w<cr>
 " inoremap <C-k> <ESC>:shell<cr>
 " nnoremap <C-k> :shell<cr>
 
@@ -109,6 +110,9 @@ set hlsearch
 filetype off                  " required!
 
 " set the runtime path to include Vundle and initialize
+" fzf
+set rtp+=~/.fzf
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Plugin 'msanders/snipmate.vim'
@@ -140,8 +144,8 @@ Plugin 'AutoClose'
 " Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 " Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'Lokaltog/vim-easymotion'
-let g:EasyMotion_smartcase = 1
+" Plugin 'Lokaltog/vim-easymotion'
+" let g:EasyMotion_smartcase = 1
 " Gif config
 " nmap  / <Plug>(easymotion-sn)
 " map  <leader>/ <Plug>(easymotion-sn)
@@ -154,12 +158,6 @@ let g:EasyMotion_smartcase = 1
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/unite.vim'
 
-Plugin 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
-
-" nnoremap <leader>t :CtrlPTag<cr>
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
 "vim-airline
 Bundle 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
@@ -176,53 +174,14 @@ autocmd InsertEnter,InsertLeave * set cul!
 Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/syntastic'
 
-" ctrlp
-" Plugin 'kien/ctrlp.vim'
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-" let g:ctrlp_prompt_mappings = {
-" \ 'AcceptSelection("e")': [],
-" \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
-" \ }
-" let g:ctrlp_max_files=0
-" let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_max_depth = 40
-" set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"   \ 'file': '\v\.(exe|so|dll)$',
-"   \ 'link': 'some_bad_symbolic_links',
-"   \ }
-" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-"       \ --ignore .git
-"       \ --ignore .svn
-"       \ --ignore .hg
-"       \ --ignore .DS_Store
-"       \ --ignore "**/*.pyc"
-"       \ -g ""'
-" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-" Plugin 'FelikZ/ctrlp-py-matcher'
-" nmap <leader>bb :CtrlPBuffer<cr>
-" Plugin 'scrooloose/nerdtree'
-" Plugin 'jistr/vim-nerdtree-tabs'
-" let NERDTreeDirArrows=0
-" map <C-n> :NERDTreeToggle<CR>
-" Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
-" Plugin 'jlanzarotta/bufexplorer'
-" let g:bufExplorerFindActive=1        " Go to active window.
-" nmap  <leader>be <Nop>
-" nmap  <leader>bs <Nop>
-" " nmap  <leader>bv <Nop>
-" noremap <silent> <leader>bb :BufExplorerHorizontalSplit<CR>
-
 Plugin 'tomtom/tcomment_vim'
 Plugin 'myusuf3/numbers.vim'
+Plugin 'davidhalter/jedi-vim'
 " Plugin 'Shougo/vimproc.vim'
 " Plugin 'Shougo/vimshell.vim'
-" Plugin 'christoomey/vim-tmux-navigator'
-" Plugin 'sjl/splice.vim'
+
+" Pandoc 
 Plugin 'vim-pandoc/vim-pandoc'
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#spell#enabled = 1
@@ -230,7 +189,17 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-pandoc-after'
 let g:pandoc#after#modules#enabled = ["supertab"]
 
+Plugin 'justinmk/vim-sneak'
+let g:sneak#streak = 1
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+xmap f <Plug>Sneak_s
+xmap F <Plug>Sneak_S
+omap f <Plug>Sneak_s
+omap F <Plug>Sneak_S
+
 Plugin 'tpope/vim-surround'
+
 Plugin 'tpope/vim-fugitive'
 autocmd BufReadPost fugitive://* set bufhidden=delete
 Plugin 'tpope/vim-repeat'
@@ -239,7 +208,6 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'repmo.vim'
 Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'chrisbra/changesPlugin'
 Plugin 'kien/rainbow_parentheses.vim'
 let g:rbpt_colorpairs = [
 \ ['brown',       'RoyalBlue3'],
@@ -278,8 +246,6 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_latexmk_preview_continuously=1
 " let g:LatexBox_latexmk_options="-f -outdir='Output'"
 let g:LatexBox_latexmk_options="-f -outdir='Output -pdflatex='pdflatex -synctex=1 \%O \%S'"
-" let g:LatexBox_viewer="open -a Skim"
-" let g:LatexBox_viewer="/Applications/Skim.app/Contents/MacOS/Skim"
 let g:LatexBox_build_dir="Output"
 let b:build_dir="Output"
 " map <silent> <Leader>ls :silent
@@ -289,26 +255,15 @@ let b:build_dir="Output"
 "             
 Plugin 'derekwyatt/vim-scala'
 Plugin 'solarnz/thrift.vim'
-set hidden
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'neilagabriel/vim-geeknote'
+Plugin 'danro/rename.vim'
+Plugin 'terryma/vim-expand-region'
 
-" Plugin 'kana/vim-textobj-entire'
-" Plugin 'edkolev/tmuxline.vim'
-" " git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" " The sparkup vim script is in a subdirectory of this repo called vim.
-" " Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" " Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
-"
-" " All of your Plugins must be added before the following line
+
+" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-" fzf
-set rtp+=~/.fzf
 
 " ranger
 fun! RangerChooser(type)
@@ -365,6 +320,7 @@ endfunction
 
 function! OpenInIntelliJ()
     execute "!/Applications/IntelliJ\\ IDEA\\ 14.app/Contents/MacOS/idea ~/workspace/source/science/.pants.d/idea/idea/TwitterIdeaGen_idea/project --line " . line('.') . " " . expand('%:p') . "&>/dev/null"
+
 endfunction
 
 function! GetAppIDs()
@@ -374,12 +330,12 @@ function! GetAppIDs()
 endfunction
 
 nnoremap <leader><leader>i :Silent call OpenInIntelliJ()<CR>
-nnoremap <silent> <C-f> :call fzf#run({
-            \   'source':      BufGet(),
-            \   'sink':        function('LineOpen'),
-            \   'options':     '+m',
-            \   'tmux_height': '40%'
-            \ })<CR>
+" nnoremap <silent> <C-f> :call fzf#run({
+"             \   'source':      BufGet(),
+"             \   'sink':        function('LineOpen'),
+"             \   'options':     '+m',
+"             \   'tmux_height': '40%'
+"             \ })<CR>
 nnoremap <silent> <leader><leader>f :call fzf#run({
             \   'dir':         Gitroot(),
             \   'sink':        'tabe',
@@ -405,5 +361,6 @@ vnoremap <silent> # :<C-U>
 
 " command! MD execute "silent !open -a Marked\\ 2 %"
 command! -nargs=0 MD
-\ | execute ":silent !open -a Marked\\ 2 %"
+\ | execute ":silent !open -a Marked\\ 2 '%:p'"
 \ | execute ':redraw!'
+
