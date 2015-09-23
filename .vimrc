@@ -2,16 +2,12 @@ set encoding=utf-8
 set t_Co=256
 set t_ut=
 set shortmess=a
-" set cmdheight=2
 " auto load file in case of change outside of Vim
-" set autoread
-" au FocusGained,BufEnter * :silent! !
-" au FocusLost,WinLeave * :silent! w
+set autoread
 " colors Monokai
 " let g:monokai_original = 1
 " let g:monokai_termcolors=256
 " let g:monokai_termtrans=1
-" colors google
 set clipboard=unnamed
 syntax enable
 let g:solarized_termcolors=256
@@ -42,9 +38,18 @@ set softtabstop=4
 set textwidth=120
 set autoindent
 set hidden
+set macmeta
 let mapleader="\\"
 let maplocalleader="\\"
 
+" for neovim
+if has("unix")
+  let s:uname = system("uname")
+  let g:python_host_prog='/usr/bin/python'
+  if s:uname == "Darwin\n"
+    let g:python_host_prog='/usr/local/bin/python'
+  endif
+endif
 
 " Display the number of matches for the last search
 nmap <leader># :%s:<C-R>/::gn<cr>
@@ -80,8 +85,6 @@ inoremap jj <ESC>
 " vnoremap jj <ESC>
 " inoremap <C-s> <ESC>:w<cr>a
 " nnoremap <C-s> :w<cr>
-" inoremap <C-k> <ESC>:shell<cr>
-" nnoremap <C-k> :shell<cr>
 
 " disable arrowkeys
 " noremap <Up> <Nop>
@@ -99,6 +102,7 @@ nnoremap J gT
 syntax on
 
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 filetype indent on
 filetype plugin on
@@ -112,11 +116,9 @@ filetype off                  " required!
 " set the runtime path to include Vundle and initialize
 " fzf
 set rtp+=~/.fzf
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Plugin 'msanders/snipmate.vim'
-" Plugin 'fo60213/matlab-snippets'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/matchit'
 " Plugin 'xolox/vim-session'
@@ -142,17 +144,6 @@ Plugin 'AutoClose'
 " let g:yankring_replace_n_nkey =''
 "
 " Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
-
-" Plugin 'git://git.wincent.com/command-t.git'
-" Plugin 'Lokaltog/vim-easymotion'
-" let g:EasyMotion_smartcase = 1
-" Gif config
-" nmap  / <Plug>(easymotion-sn)
-" map  <leader>/ <Plug>(easymotion-sn)
-" omap <leader>/ <Plug>(easymotion-tn)
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
-
 
 " Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neocomplcache.vim'
@@ -259,6 +250,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'neilagabriel/vim-geeknote'
 Plugin 'danro/rename.vim'
 Plugin 'terryma/vim-expand-region'
+Plugin 'vim-scripts/mru.vim'
 Plugin 'mhinz/vim-startify'
 let g:startify_bookmarks = [ '~/.vimrc' ]
 let g:startify_enable_special         = 0
@@ -284,7 +276,10 @@ let g:startify_list_order = [
 let g:startify_custom_header =
             \ map(split(system('cowsay Hi Icelen!'), '\n'), '"   ". v:val') + ['']
 
-
+Plugin 'airblade/vim-gitgutter'
+Plugin 'kshenoy/vim-signature'
+let g:SignatureMarkerTextHLDynamic=1
+let g:SignatureMarkTextHLDynamic=1
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
