@@ -26,8 +26,8 @@ set background=dark
 "
 "
 set t_ut=
-set relativenumber 
-set number  
+set relativenumber
+set number
 set tabstop=8
 set modeline
 set shiftwidth=4
@@ -87,17 +87,17 @@ inoremap jj <ESC>
 " nnoremap <C-s> :w<cr>
 
 " disable arrowkeys
-" noremap <Up> <Nop>
-" noremap <Down> <Nop>
-" noremap <Left> <Nop>
-" noremap <Right> <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 " inoremap <Up> <Nop>
 " inoremap <Down> <Nop>
 " inoremap <Left> <Nop>
 " inoremap <Right> <Nop>
 
-nnoremap K gt
-nnoremap J gT
+nnoremap K :bnext<CR>
+nnoremap J :bprev<CR>
 
 syntax on
 
@@ -140,7 +140,7 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 Plugin 'AutoClose'
 " Bundle 'YankRing.vim'
 " nnoremap <silent> <C-Y>:YRShow<CR>
-" let g:yankring_replace_n_pkey ='' 
+" let g:yankring_replace_n_pkey =''
 " let g:yankring_replace_n_nkey =''
 "
 " Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
@@ -153,13 +153,14 @@ Plugin 'Shougo/unite.vim'
 Bundle 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2
-Bundle 'paranoida/vim-airlineish'
 let g:airline_theme = 'bubblegum'
+Plugin 'paranoida/vim-airlineish'
 " let g:airline_theme = 'airlineish'
 " let g:airline_theme = 'molokai'
+" let g:airline_theme = 'solarized'
 
 autocmd InsertEnter,InsertLeave * set cul!
 Plugin 'flazz/vim-colorschemes'
@@ -172,7 +173,7 @@ Plugin 'davidhalter/jedi-vim'
 " Plugin 'Shougo/vimproc.vim'
 " Plugin 'Shougo/vimshell.vim'
 
-" Pandoc 
+" Pandoc
 Plugin 'vim-pandoc/vim-pandoc'
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#spell#enabled = 1
@@ -228,8 +229,17 @@ au Syntax * RainbowParenthesesLoadBraces
 Plugin 'szw/vim-ctrlspace'
 inoremap <C-Space> <ESC>:CtrlSpace<cr>
 nnoremap <C-Space> :CtrlSpace<cr>
-let g:ctrlspace_use_tabline = 1
+nnoremap <silent><C-p> :CtrlSpace O<CR>
+let g:CtrlSpaceUseTabline = 1
 let g:airline_exclude_preview = 1
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceUseUnicode = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+if executable("ag")
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
+let g:CtrlSpaceSearchTiming = 200
 " set showtabline=0
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
@@ -243,12 +253,11 @@ let b:build_dir="Output"
 "             \ !/Applications/Skim.app/Contents/SharedSupport/displayline
 "             \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
 "             \ "%:p" <CR>
-"             
+"
 Plugin 'derekwyatt/vim-scala'
 Plugin 'solarnz/thrift.vim'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'neilagabriel/vim-geeknote'
-Plugin 'danro/rename.vim'
+" Plugin 'neilagabriel/vim-geeknote'
 Plugin 'terryma/vim-expand-region'
 Plugin 'vim-scripts/mru.vim'
 Plugin 'mhinz/vim-startify'
@@ -260,8 +269,8 @@ let g:startify_change_to_dir          = 1
 let g:startify_session_autoload       = 1
 let g:startify_session_persistence    = 1
 let g:startify_session_delete_buffers = 1
-let g:startify_custom_footer =
-            \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
+" let g:startify_custom_footer =
+            " \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
 
 let g:startify_list_order = [
             \ ['   LRU:'],
@@ -284,6 +293,8 @@ let g:SignatureMarkTextHLDynamic=1
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Functions
+"
 " ranger
 fun! RangerChooser(type)
     exec "silent !ranger --choosefiles=/tmp/chosenfile " . expand("%:p:h")
@@ -293,7 +304,7 @@ fun! RangerChooser(type)
         elseif a:type == 2
             exec 'Evwindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
         elseif a:type == 3
-            exec 'edit ' . system('cat /tmp/chosenfile|tr "\n" " "')
+            exec 'Ebufs ' . system('cat /tmp/chosenfile|tr "\n" " "')
         else
             exec 'Etabs ' . system('cat /tmp/chosenfile|tr "\n" " "')
         endif
@@ -304,12 +315,13 @@ endfun
 command! -nargs=1 Silent
 \ | execute ':silent '.<q-args>
 \ | execute ':redraw!'
-map <leader><leader>r :call RangerChooser(4)<CR>
+map <leader><leader>r :call RangerChooser(3)<CR>
 " map <leader>rv :call RangerChooser(2)<CR>
 " map <leader>rs :call RangerChooser(1)<CR>
 " map <leader>rb :call RangerChooser(3)<CR>
 " Enable add multiple files to edit
 command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
+command! -complete=file -nargs=+ Ebufs call s:ETW('e', <f-args>)
 " command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
 " command! -complete=file -nargs=+ Evwindows call s:ETW('vnew', <f-args>)
 function! s:ETW(what, ...)
@@ -333,22 +345,24 @@ function! LineOpen(e)
     execute 'normal! '. matchstr(a:e, '[0-9]\+'). 'G'
 endfunction
 
-function! Gitroot()
-    return system('git root 2>/dev/null')
-endfunction
-
+" IntelliJ
 function! OpenInIntelliJ()
-    execute "!/Applications/IntelliJ\\ IDEA\\ 14.app/Contents/MacOS/idea ~/workspace/source/science/.pants.d/idea/idea/TwitterIdeaGen_idea/project --line " . line('.') . " " . expand('%:p') . "&>/dev/null"
-
+    execute "!/Applications/IntelliJ\\ IDEA\\ 14\\ CE.app/Contents/MacOS/idea /Users/icelen/IdeaProjects/testJavaWithIntelliJ/ --line " . line('.') . " " . expand('%:p') . "&>/dev/null"
 endfunction
 
+nnoremap <leader><leader>i :Silent call OpenInIntelliJ()<CR>
+
+" tempfunction for geting appID 
 function! GetAppIDs()
     execute 'g!/<td>\d\+<\/td>/d'
     execute '%s/^\s\+<td>\(\d\+\)<\/td>/\1/g'
     execute '%y+'
 endfunction
 
-nnoremap <leader><leader>i :Silent call OpenInIntelliJ()<CR>
+" fzf related
+function! Gitroot()
+    return system('git root 2>/dev/null')
+endfunction
 " nnoremap <silent> <C-f> :call fzf#run({
 "             \   'source':      BufGet(),
 "             \   'sink':        function('LineOpen'),
@@ -357,7 +371,7 @@ nnoremap <leader><leader>i :Silent call OpenInIntelliJ()<CR>
 "             \ })<CR>
 nnoremap <silent> <leader><leader>f :call fzf#run({
             \   'dir':         Gitroot(),
-            \   'sink':        'tabe',
+            \   'sink':        'e',
             \   'options':     '-m',
             \ })<CR>
 " nnoremap <silent> <leader>f :call FZFGit()<CR>
@@ -366,6 +380,7 @@ nnoremap <silent> <leader><leader>m :call fzf#run({
             \'sink' : 'e ',
             \'options' : '-m',
             \})<CR>
+
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
@@ -382,4 +397,3 @@ vnoremap <silent> # :<C-U>
 command! -nargs=0 MD
 \ | execute ":silent !open -a Marked\\ 2 '%:p'"
 \ | execute ':redraw!'
-
