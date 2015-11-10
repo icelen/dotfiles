@@ -20,7 +20,7 @@ fi
 
 # Vim Mode indicator from http://paulgoscicki.com/archives/2012/09/vi-mode-indicator-in-zsh-prompt/
 vim_ins_mode="%{$fg[cyan]%}⚔%{$reset_color%}"
-vim_cmd_mode="%{$fg[green]%}⬡%{$reset_color%}"
+vim_cmd_mode="%{$fg[green]%}⚓%{$reset_color%}"
 VIMODE=$vim_ins_mode
 function zle-keymap-select {
     VIMODE="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
