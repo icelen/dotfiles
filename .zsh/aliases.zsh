@@ -28,7 +28,7 @@ alias lc='ls -l | wc -l'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 
-alias matlabno="matlab -nodesktop -nosplash"
+alias matlabno="matlab -nodesktop -nosplash -nojvm"
 alias python="ipython"
 # alias shortcut='gnome-desktop-item-edit ~/Desktop/ --create-new'
 # alias tmux="TERM=screen-256color-bce tmux -2"
@@ -50,11 +50,11 @@ alias -s log=vim
 # alias zz='fasd_cd -d -i'
 alias fe='vim -p $(fzf -m)'
 # servers
-alias chicago="ssh lcen@chicago.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
-alias km="ssh lcen@kunming.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
-alias nb="ssh lcen@ningbo.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
-alias sj="ssh lcen@sanjose.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
-alias mc18="ssh lcen@mc18.cs.purdue.edu -t 'zsh'"
+alias chicago="ssh -R 22288:localhost:22 lcen@chicago.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
+alias km="ssh -R 22288:localhost:22 lcen@kunming.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
+alias nb="ssh -R 22288:localhost:22 lcen@ningbo.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
+alias sj="ssh -R 22288:localhost:22 lcen@sanjose.cs.purdue.edu -t 'cd /scratch7/lcen;zsh'"
+alias mc18="ssh -R 22288:localhost:22 lcen@mc18.cs.purdue.edu -t 'zsh'"
 alias nest="ssh -R 22088:localhost:22 lcen@hadoopnest1"
 alias abusenest="ssh -R 22288:localhost:22 -t abuse@hadoopnest1"
 alias vnote='vim -c Geeknote'
