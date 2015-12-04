@@ -244,9 +244,10 @@ let g:CtrlSpaceSearchTiming = 200
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " let g:LatexBox_latexmk_async=1
+let g:LatexBox_autojump=1
 let g:LatexBox_latexmk_preview_continuously=1
-" let g:LatexBox_latexmk_options="-f -outdir='Output'"
-let g:LatexBox_latexmk_options="-f -outdir='Output -pdflatex='pdflatex -synctex=1 \%O \%S'"
+let g:LatexBox_latexmk_options="-f -pdf -outdir='Output'"
+" let g:LatexBox_latexmk_options="-f -outdir='Output' -pdflatex='pdflatex -synctex=1 \%O \%S'"
 let g:LatexBox_build_dir="Output"
 let b:build_dir="Output"
 " map <silent> <Leader>ls :silent
