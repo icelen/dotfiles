@@ -133,6 +133,7 @@ Plugin 'tmhedberg/matchit'
 
 Plugin 'L9'
 Plugin 'LargeFile'
+Plugin 'Terminus'
 Plugin 'godlygeek/tabular'
 Plugin 'maxbrunsfeld/vim-yankstack'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
@@ -150,14 +151,16 @@ Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/unite.vim'
 
 "vim-airline
-Bundle 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2
-let g:airline_theme = 'bubblegum'
-Plugin 'paranoida/vim-airlineish'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme = 'solarized'
+" let g:airline_theme = 'bubblegum'
+" Plugin 'paranoida/vim-airlineish'
 " let g:airline_theme = 'airlineish'
 " let g:airline_theme = 'molokai'
 " let g:airline_theme = 'solarized'
@@ -291,6 +294,7 @@ Plugin 'kshenoy/vim-signature'
 let g:SignatureMarkerTextHLDynamic=1
 let g:SignatureMarkTextHLDynamic=1
 " All of your Plugins must be added before the following line
+Plugin 'rking/ag.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -353,7 +357,7 @@ endfunction
 
 nnoremap <leader><leader>i :Silent call OpenInIntelliJ()<CR>
 
-" tempfunction for geting appID 
+" tempfunction for geting appID
 function! GetAppIDs()
     execute 'g!/<td>\d\+<\/td>/d'
     execute '%s/^\s\+<td>\(\d\+\)<\/td>/\1/g'
