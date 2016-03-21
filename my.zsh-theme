@@ -1,5 +1,11 @@
 local ret_status="%(?:%{$fg_bold[green]%}@ :%{$fg_bold[red]%}@ %s)"
 
+EMOJI=(💩 🐦 🚀 🐞 🎨 🍕 🐭 👽 ☕️ 🔬 💀 🐷 🐼 🐶 🐸 🐧 🐳 🍔 🍣 🍻 🔮 💰 💎 💾 💜 🍪 🌞 🌍 🐌 🐓 🍄 )
+
+function random_emoji {
+  echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
+}
+
 function get_nr_jobs() {
     jobs | wc -l
 }
@@ -54,5 +60,5 @@ ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[cyan]%}§ "
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}◒ "
 
 RPROMPT='%{$fg_bold[red]%}[$(get_nr_jobs)] %{$fg_bold[green]%}%*%{$reset_color%}'
-PROMPT='%{$fg[yellow]%}${me}${ret_status}%{$fg_bold[green]%}%p %{$fg[red]%}${RANGERPROMPT}%{$fg_bold[blue]%}%~%{$fg_bold[blue]%} $(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}
+PROMPT='$(random_emoji)%{$fg[yellow]%}${me}${ret_status}%{$fg_bold[green]%}%p %{$fg[red]%}${RANGERPROMPT}%{$fg_bold[blue]%}%~%{$fg_bold[blue]%} $(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}
 ${VIMODE} ➜  '
