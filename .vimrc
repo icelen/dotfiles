@@ -156,6 +156,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#ctrlspace#enabled = 1
 set laststatus=2
 Plugin 'vim-airline/vim-airline-themes'
 let g:airline_theme = 'solarized'
@@ -233,6 +234,7 @@ Plugin 'szw/vim-ctrlspace'
 inoremap <C-Space> <ESC>:CtrlSpace<cr>
 nnoremap <C-Space> :CtrlSpace<cr>
 nnoremap <silent><C-p> :CtrlSpace O<CR>
+let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
 let g:CtrlSpaceUseTabline = 1
 let g:airline_exclude_preview = 1
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
@@ -295,6 +297,10 @@ let g:SignatureMarkerTextHLDynamic=1
 let g:SignatureMarkTextHLDynamic=1
 " All of your Plugins must be added before the following line
 Plugin 'rking/ag.vim'
+let g:ag_working_path_mode="r"
+let g:ag_highlight=1
+Plugin 'Chun-Yang/vim-action-ag'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 

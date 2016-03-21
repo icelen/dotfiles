@@ -77,14 +77,14 @@ ranger-cd() {
 # fzf related functions
 # fh - repeat history
 fh() {
-    print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s -x --tac | sed 's/ *[0-9]* *//')
+    print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf -i +s -x --tac | sed 's/ *[0-9]* *//')
 }
 
 # jump using z
 unalias z
 z() {
     if [[ -z "$*" ]]; then
-        cd "$(fasd_cd -d -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf)"
+        cd "$(fasd_cd -d -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf -i)"
     else
         fasd_cd -d "$@"
     fi
@@ -119,6 +119,7 @@ fshow() {
     done < <(sed '1d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
   done
 }
+
 vnest() {
     allButLast=${@:1:${#}-1}
     # echo $allButLast
