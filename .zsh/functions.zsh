@@ -120,6 +120,11 @@ fshow() {
   done
 }
 
+lpw() {
+  id=$(lpass ls | fzf | awk '{print $(NF)}' | sed 's/\]//g')
+  # echo $id
+  lpass show -c --password $id
+}
 vnest() {
     allButLast=${@:1:${#}-1}
     # echo $allButLast

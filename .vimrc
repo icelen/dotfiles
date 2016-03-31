@@ -1,19 +1,21 @@
+" vim:fdm=marker
+" basic {{{
 set encoding=utf-8
 set t_Co=256
 set t_ut=
 set shortmess=a
 " auto load file in case of change outside of Vim
 set autoread
-" colors Monokai
-" let g:monokai_original = 1
-" let g:monokai_termcolors=256
-" let g:monokai_termtrans=1
 set clipboard=unnamed
 syntax enable
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
 set background=dark
+" colors Monokai
+" let g:monokai_original = 1
+" let g:monokai_termcolors=256
+" let g:monokai_termtrans=1
 
 " if &term =~ '^screen'
 "     execute "set t_kP=\e[5;*~"
@@ -25,6 +27,20 @@ set background=dark
 " endif
 "
 "
+set backspace=indent,eol,start  "bs:    allows you to backspace over the listed character types
+set linebreak                   "lbr:   causes vim to not wrap text in the middle of a word
+" set wrap                        "wrap:  wraps lines by default
+" Toggle line wrapping in normal mode:
+" nmap <silent> <C-P> :set nowrap!<cr>:set nowrap?<cr>
+
+set showmatch                   "sm:    flashes matching brackets or parentheses
+set nobackup                    "bk:    does not write a persistent backup file of an edited file
+set writebackup                 "wb:    does keep a backup file while editing a file
+set lazyredraw                  "lz:    will not redraw the screen while running macros (goes faster)
+set colorcolumn=80
+set backspace=indent,eol,start
+set ruler
+set showcmd
 set t_ut=
 set relativenumber
 set number
@@ -38,48 +54,25 @@ set softtabstop=4
 set textwidth=120
 set autoindent
 set hidden
+" }}}
+
+" Keys {{{
 set macmeta
 let mapleader="\\"
 let maplocalleader="\\"
-
-" for neovim
-if has("unix")
-  let s:uname = system("uname")
-  let g:python_host_prog='/usr/bin/python'
-  if s:uname == "Darwin\n"
-    let g:python_host_prog='/usr/local/bin/python'
-  endif
-endif
 
 " Display the number of matches for the last search
 nmap <leader># :%s:<C-R>/::gn<cr>
 
 nmap L <End>
-nmap H ^
+nmap H <HOME>
 " search visually selected
 vnoremap // y/<C-R>"<CR>
 " No ex-mode
 nnoremap Q <Nop>
 nnoremap q <Nop>
 
-set backspace=indent,eol,start  "bs:    allows you to backspace over the listed character types
-set linebreak                   "lbr:   causes vim to not wrap text in the middle of a word
-" set wrap                        "wrap:  wraps lines by default
-" Toggle line wrapping in normal mode:
-" nmap <silent> <C-P> :set nowrap!<cr>:set nowrap?<cr>
-
-set showmatch                   "sm:    flashes matching brackets or parentheses
-set nobackup                    "bk:    does not write a persistent backup file of an edited file
-set writebackup                 "wb:    does keep a backup file while editing a file
-
-set lazyredraw                  "lz:    will not redraw the screen while running macros (goes faster)
 set pastetoggle=<F9>            "pt:    useful so auto-indenting doesn't mess up code when pasting
-set colorcolumn=80
-
-set backspace=indent,eol,start
-
-set ruler
-set showcmd
 "screen setting
 inoremap jj <ESC>
 " vnoremap jj <ESC>
@@ -95,33 +88,42 @@ noremap <Right> <Nop>
 " inoremap <Down> <Nop>
 " inoremap <Left> <Nop>
 " inoremap <Right> <Nop>
+nnoremap K 5k
+nnoremap J 5j
 
-nnoremap K :bnext<CR>
-nnoremap J :bprev<CR>
+" nnoremap <M-k> :bnext<CR>
+" nnoremap <M-j> :bprev<CR>
+"
+" }}}
 
-syntax on
-
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
-filetype indent on
-filetype plugin on
-set nocompatible              " be iMproved
-set incsearch                   "is:    automatically begins searching as you type
-" set ignorecase                  "ic:    ignores case when pattern matching
-set smartcase                   "scs:   ignores ignorecase when pattern contains uppercase characters
-set hlsearch
-filetype off                  " required!
-
-" set the runtime path to include Vundle and initialize
+" More settings {{{
 " fzf
 set rtp+=~/.fzf
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" for neovim
+if has("unix")
+  let s:uname = system("uname")
+  let g:python_host_prog='/usr/bin/python'
+  if s:uname == "Darwin\n"
+    let g:python_host_prog='/usr/local/bin/python'
+  endif
+endif
+
+" }}}
+
+" Vim-Plug {{{
+"
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+call plug#begin('~/.vim/plugged')
+" set the runtime path to include Vundle and initialize
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
 " Plugin 'msanders/snipmate.vim'
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tmhedberg/matchit'
-" Plugin 'xolox/vim-session'
+Plug 'gmarik/Vundle.vim'
+Plug 'tmhedberg/matchit'
+" Plug 'xolox/vim-session'
 " set sessionoptions-=help
 " set sessionoptions-=options
 " let g:session_autoload=yes
@@ -131,61 +133,61 @@ Plugin 'tmhedberg/matchit'
 " let g:session_default_to_last=1
 " let g:session_command_aliases=1
 
-Plugin 'L9'
-Plugin 'LargeFile'
-Plugin 'Terminus'
-Plugin 'godlygeek/tabular'
-Plugin 'maxbrunsfeld/vim-yankstack'
+Plug 'L9'
+Plug 'LargeFile'
+Plug 'Terminus'
+Plug 'godlygeek/tabular'
+Plug 'maxbrunsfeld/vim-yankstack'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
-Plugin 'AutoClose'
+Plug 'AutoClose'
 " Bundle 'YankRing.vim'
 " nnoremap <silent> <C-Y>:YRShow<CR>
 " let g:yankring_replace_n_pkey =''
 " let g:yankring_replace_n_nkey =''
 "
-" Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
+" Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
-" Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neocomplcache.vim'
-Plugin 'Shougo/unite.vim'
+" Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neocomplcache.vim'
+Plug 'Shougo/unite.vim'
 
 "vim-airline
-Plugin 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#ctrlspace#enabled = 1
 set laststatus=2
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme = 'solarized'
 " let g:airline_theme = 'bubblegum'
-" Plugin 'paranoida/vim-airlineish'
+" Plug 'paranoida/vim-airlineish'
 " let g:airline_theme = 'airlineish'
 " let g:airline_theme = 'molokai'
 " let g:airline_theme = 'solarized'
 
 autocmd InsertEnter,InsertLeave * set cul!
-Plugin 'flazz/vim-colorschemes'
-Plugin 'scrooloose/syntastic'
+Plug 'flazz/vim-colorschemes'
+Plug 'scrooloose/syntastic'
 
-Plugin 'ervandew/supertab'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'davidhalter/jedi-vim'
-" Plugin 'Shougo/vimproc.vim'
-" Plugin 'Shougo/vimshell.vim'
+Plug 'ervandew/supertab'
+Plug 'tomtom/tcomment_vim'
+Plug 'myusuf3/numbers.vim'
+Plug 'davidhalter/jedi-vim'
+" Plug 'Shougo/vimproc.vim'
+" Plug 'Shougo/vimshell.vim'
 
 " Pandoc
-Plugin 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' }
 let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#spell#enabled = 1
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'vim-pandoc/vim-pandoc-after'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-after'
 let g:pandoc#after#modules#enabled = ["supertab"]
 
-Plugin 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
 let g:sneak#streak = 1
 nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S
@@ -194,17 +196,17 @@ xmap F <Plug>Sneak_S
 omap f <Plug>Sneak_s
 omap F <Plug>Sneak_S
 
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 autocmd BufReadPost fugitive://* set bufhidden=delete
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'repmo.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-unimpaired'
+Plug 'repmo.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'kien/rainbow_parentheses.vim'
 let g:rbpt_colorpairs = [
 \ ['brown',       'RoyalBlue3'],
 \ ['Darkblue',    'SeaGreen3'],
@@ -230,7 +232,7 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-Plugin 'szw/vim-ctrlspace'
+Plug 'szw/vim-ctrlspace'
 inoremap <C-Space> <ESC>:CtrlSpace<cr>
 nnoremap <C-Space> :CtrlSpace<cr>
 nnoremap <silent><C-p> :CtrlSpace O<CR>
@@ -247,7 +249,7 @@ endif
 let g:CtrlSpaceSearchTiming = 200
 " set showtabline=0
 
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 " let g:LatexBox_latexmk_async=1
 let g:LatexBox_autojump=1
 let g:LatexBox_latexmk_preview_continuously=1
@@ -260,13 +262,13 @@ let b:build_dir="Output"
 "             \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
 "             \ "%:p" <CR>
 "
-Plugin 'derekwyatt/vim-scala'
-Plugin 'solarnz/thrift.vim'
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'derekwyatt/vim-scala'
+Plug 'solarnz/thrift.vim'
+" Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'neilagabriel/vim-geeknote'
-Plugin 'terryma/vim-expand-region'
-Plugin 'vim-scripts/mru.vim'
-Plugin 'mhinz/vim-startify'
+Plug 'terryma/vim-expand-region'
+Plug 'vim-scripts/mru.vim'
+Plug 'mhinz/vim-startify'
 let g:startify_bookmarks = [ '~/.vimrc' ]
 let g:startify_enable_special         = 0
 let g:startify_files_number           = 8
@@ -291,20 +293,22 @@ let g:startify_list_order = [
 let g:startify_custom_header =
             \ map(split(system('cowsay Hi Icelen!'), '\n'), '"   ". v:val') + ['']
 
-Plugin 'airblade/vim-gitgutter'
-Plugin 'kshenoy/vim-signature'
+Plug 'airblade/vim-gitgutter'
+Plug 'kshenoy/vim-signature'
 let g:SignatureMarkerTextHLDynamic=1
 let g:SignatureMarkTextHLDynamic=1
 " All of your Plugins must be added before the following line
-Plugin 'rking/ag.vim'
+Plug 'rking/ag.vim'
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
-Plugin 'Chun-Yang/vim-action-ag'
+Plug 'Chun-Yang/vim-action-ag'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+" call vundle#end()            " required
+" filetype plugin indent on    " required
+call plug#end()
+"}}}
 
-" Functions
+" Functions {{{
 "
 " ranger
 fun! RangerChooser(type)
@@ -408,3 +412,4 @@ vnoremap <silent> # :<C-U>
 command! -nargs=0 MD
 \ | execute ":silent !open -a Marked\\ 2 '%:p'"
 \ | execute ':redraw!'
+" }}}
