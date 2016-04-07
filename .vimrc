@@ -5,17 +5,8 @@ set t_Co=256
 set t_ut=
 set shortmess=a
 " auto load file in case of change outside of Vim
-set autoread
-set clipboard=unnamed
+" set autoread
 syntax enable
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-colorscheme solarized
-set background=dark
-" colors Monokai
-" let g:monokai_original = 1
-" let g:monokai_termcolors=256
-" let g:monokai_termtrans=1
 
 " if &term =~ '^screen'
 "     execute "set t_kP=\e[5;*~"
@@ -38,8 +29,8 @@ set nobackup                    "bk:    does not write a persistent backup file 
 set writebackup                 "wb:    does keep a backup file while editing a file
 set lazyredraw                  "lz:    will not redraw the screen while running macros (goes faster)
 set colorcolumn=80
-set backspace=indent,eol,start
-set ruler
+" et backspace=indent,eol,start
+" set ruler
 set showcmd
 set t_ut=
 set relativenumber
@@ -52,62 +43,8 @@ set number
 set expandtab
 set softtabstop=4
 set textwidth=120
-set autoindent
+" set autoindent
 set hidden
-" }}}
-
-" Keys {{{
-set macmeta
-let mapleader="\\"
-let maplocalleader="\\"
-
-" Display the number of matches for the last search
-nmap <leader># :%s:<C-R>/::gn<cr>
-
-nmap L <End>
-nmap H <HOME>
-" search visually selected
-vnoremap // y/<C-R>"<CR>
-" No ex-mode
-nnoremap Q <Nop>
-nnoremap q <Nop>
-
-set pastetoggle=<F9>            "pt:    useful so auto-indenting doesn't mess up code when pasting
-"screen setting
-inoremap jj <ESC>
-" vnoremap jj <ESC>
-" inoremap <C-s> <ESC>:w<cr>a
-" nnoremap <C-s> :w<cr>
-
-" disable arrowkeys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-" inoremap <Up> <Nop>
-" inoremap <Down> <Nop>
-" inoremap <Left> <Nop>
-" inoremap <Right> <Nop>
-nnoremap K 5k
-nnoremap J 5j
-
-" nnoremap <M-k> :bnext<CR>
-" nnoremap <M-j> :bprev<CR>
-"
-" }}}
-
-" More settings {{{
-" fzf
-set rtp+=~/.fzf
-" for neovim
-if has("unix")
-  let s:uname = system("uname")
-  let g:python_host_prog='/usr/bin/python'
-  if s:uname == "Darwin\n"
-    let g:python_host_prog='/usr/local/bin/python'
-  endif
-endif
-
 " }}}
 
 " Vim-Plug {{{
@@ -121,6 +58,11 @@ call plug#begin('~/.vim/plugged')
 " set rtp+=~/.vim/bundle/Vundle.vim
 " call vundle#begin()
 " Plugin 'msanders/snipmate.vim'
+Plug 'morhetz/gruvbox'
+Plug 'sjl/gundo.vim'
+" toggle gundo
+nnoremap <leader>u :GundoToggle<CR>
+Plug 'tpope/vim-sensible'
 Plug 'gmarik/Vundle.vim'
 Plug 'tmhedberg/matchit'
 " Plug 'xolox/vim-session'
@@ -154,12 +96,12 @@ Plug 'Shougo/unite.vim'
 
 "vim-airline
 Plug 'vim-airline/vim-airline'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled    = 1
+let g:airline#extensions#syntastic#enabled  = 1
 let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#ctrlspace#enabled = 1
-set laststatus=2
+let g:airline#extensions#tabline#fnamemod   = ':t'
+let g:airline#extensions#ctrlspace#enabled  = 1
+" set laststatus=2
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme = 'solarized'
 " let g:airline_theme = 'bubblegum'
@@ -208,22 +150,22 @@ Plug 'repmo.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kien/rainbow_parentheses.vim'
 let g:rbpt_colorpairs = [
-\ ['brown',       'RoyalBlue3'],
-\ ['Darkblue',    'SeaGreen3'],
-\ ['darkgray',    'DarkOrchid3'],
-\ ['darkgreen',   'firebrick3'],
-\ ['darkcyan',    'RoyalBlue3'],
-\ ['darkred',     'SeaGreen3'],
-\ ['darkmagenta', 'DarkOrchid3'],
-\ ['brown',       'firebrick3'],
-\ ['gray',        'RoyalBlue3'],
-\ ['black',       'SeaGreen3'],
-\ ['darkmagenta', 'DarkOrchid3'],
-\ ['Darkblue',    'firebrick3'],
-\ ['darkgreen',   'RoyalBlue3'],
-\ ['darkcyan',    'SeaGreen3'],
-\ ['darkred',     'DarkOrchid3'],
-\ ['red',         'firebrick3'],
+\ ['brown'       , 'RoyalBlue3'],
+\ ['Darkblue'    , 'SeaGreen3'],
+\ ['darkgray'    , 'DarkOrchid3'],
+\ ['darkgreen'   , 'firebrick3'],
+\ ['darkcyan'    , 'RoyalBlue3'],
+\ ['darkred'     , 'SeaGreen3'],
+\ ['darkmagenta' , 'DarkOrchid3'],
+\ ['brown'       , 'firebrick3'],
+\ ['gray'        , 'RoyalBlue3'],
+\ ['black'       , 'SeaGreen3'],
+\ ['darkmagenta' , 'DarkOrchid3'],
+\ ['Darkblue'    , 'firebrick3'],
+\ ['darkgreen'   , 'RoyalBlue3'],
+\ ['darkcyan'    , 'SeaGreen3'],
+\ ['darkred'     , 'DarkOrchid3'],
+\ ['red'         , 'firebrick3'],
 \ ]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
@@ -236,13 +178,13 @@ Plug 'szw/vim-ctrlspace'
 inoremap <C-Space> <ESC>:CtrlSpace<cr>
 nnoremap <C-Space> :CtrlSpace<cr>
 nnoremap <silent><C-p> :CtrlSpace O<CR>
-let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
-let g:CtrlSpaceUseTabline = 1
-let g:airline_exclude_preview = 1
+let g:CtrlSpaceStatuslineFunction       = "airline#extensions#ctrlspace#statusline()"
+let g:CtrlSpaceUseTabline               = 1
+let g:airline_exclude_preview           = 1
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-let g:CtrlSpaceUseUnicode = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
+let g:CtrlSpaceUseUnicode               = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch    = 1
+let g:CtrlSpaceSaveWorkspaceOnExit      = 1
 if executable("ag")
     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
@@ -302,19 +244,111 @@ Plug 'rking/ag.vim'
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
 Plug 'Chun-Yang/vim-action-ag'
+Plug 'junegunn/vim-easy-align'
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " call vundle#end()            " required
 " filetype plugin indent on    " required
 call plug#end()
 "}}}
 
+" Keys {{{
+" set macmeta
+let mapleader      = "\\"
+let maplocalleader = "\\"
+
+" Display the number of matches for the last search
+nmap <leader># :%s:<C-R>/::gn<cr>
+
+nmap L <End>
+nmap H <HOME>
+
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+
+" No ex-mode
+nnoremap Q <Nop>
+nnoremap q <Nop>
+
+set pastetoggle=<F9>            "pt:    useful so auto-indenting doesn't mess up code when pasting
+"screen setting
+inoremap jj <ESC>
+" inoremap <C-s> <ESC>:w<cr>a
+" nnoremap <C-s> :w<cr>
+
+" disable arrowkeys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+" inoremap <Up> <Nop>
+" inoremap <Down> <Nop>
+" inoremap <Left> <Nop>
+" inoremap <Right> <Nop>
+nnoremap K 5k
+nnoremap J 5j
+
+" nnoremap <M-h> :bnext<CR>
+" nnoremap <M-l> :bprev<CR>
+"
+" }}}
+
+" More settings {{{
+set hlsearch
+set clipboard=unnamed
+set background=dark
+" colors Monokai
+" let g:monokai_original = 1
+" let g:monokai_termcolors=256
+" let g:monokai_termtrans=1
+"
+" colorscheme solarized
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
+colorscheme gruvbox
+let g:gruvbox_italic=1
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" fzf
+set rtp+=~/.fzf
+" for neovim
+if has("unix")
+  let s:uname = system("uname")
+  let g:python_host_prog='/usr/bin/python'
+  if s:uname == "Darwin\n"
+    let g:python_host_prog='/usr/local/bin/python'
+  endif
+endif
+
+" }}}
+
 " Functions {{{
 "
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+" toggle between number and relativenumber
+function! ToggleNumber()
+    if(&relativenumber == 1)
+        set norelativenumber
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+
 " ranger
 fun! RangerChooser(type)
     exec "silent !ranger --choosefiles=/tmp/chosenfile " . expand("%:p:h")
     if filereadable('/tmp/chosenfile')
-        if a:type == 1
+        if a:type     == 1
             exec 'Ewindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
         elseif a:type == 2
             exec 'Evwindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
@@ -385,14 +419,14 @@ endfunction
 "             \   'tmux_height': '40%'
 "             \ })<CR>
 nnoremap <silent> <leader><leader>f :call fzf#run({
-            \   'dir':         Gitroot(),
-            \   'sink':        'e',
-            \   'options':     '-m',
+            \   'dir'     : Gitroot(),
+            \   'sink'    : 'e',
+            \   'options' : '-m',
             \ })<CR>
 " nnoremap <silent> <leader>f :call FZFGit()<CR>
 nnoremap <silent> <leader><leader>m :call fzf#run({
-            \'source': v:oldfiles,
-            \'sink' : 'e ',
+            \'source'  : v:oldfiles,
+            \'sink'    : 'e ',
             \'options' : '-m',
             \})<CR>
 
