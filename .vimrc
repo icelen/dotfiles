@@ -308,9 +308,10 @@ set background=dark
 " colorscheme solarized
 " let g:solarized_termcolors=256
 " let g:solarized_termtrans=1
+" let g:gruvbox_italic=1
 colorscheme gruvbox
-let g:gruvbox_italic=1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:gruvbox_termcolors=16
 
 " fzf
 set rtp+=~/.fzf
