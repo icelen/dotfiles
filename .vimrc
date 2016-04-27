@@ -63,7 +63,6 @@ Plug 'sjl/gundo.vim'
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 Plug 'tpope/vim-sensible'
-Plug 'gmarik/Vundle.vim'
 Plug 'tmhedberg/matchit'
 " Plug 'xolox/vim-session'
 " set sessionoptions-=help
@@ -77,7 +76,7 @@ Plug 'tmhedberg/matchit'
 
 Plug 'L9'
 Plug 'LargeFile'
-Plug 'Terminus'
+" Plug 'Terminus'
 Plug 'godlygeek/tabular'
 Plug 'maxbrunsfeld/vim-yankstack'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
@@ -117,7 +116,7 @@ Plug 'scrooloose/syntastic'
 Plug 'ervandew/supertab'
 Plug 'tomtom/tcomment_vim'
 Plug 'myusuf3/numbers.vim'
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 " Plug 'Shougo/vimproc.vim'
 " Plug 'Shougo/vimshell.vim'
 
@@ -247,9 +246,8 @@ Plug 'Chun-Yang/vim-action-ag'
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
-
-" call vundle#end()            " required
-" filetype plugin indent on    " required
+Plug 'icelen/neovim-ranger'
+map <leader><leader>r :Explore<CR>
 call plug#end()
 "}}}
 
@@ -258,6 +256,8 @@ call plug#end()
 let mapleader      = "\\"
 let maplocalleader = "\\"
 
+nnoremap j zzj
+nnoremap k zzk
 " Display the number of matches for the last search
 nmap <leader># :%s:<C-R>/::gn<cr>
 
@@ -288,8 +288,8 @@ noremap <Right> <Nop>
 " inoremap <Down> <Nop>
 " inoremap <Left> <Nop>
 " inoremap <Right> <Nop>
-nnoremap K 5k
-nnoremap J 5j
+nnoremap K 5kzz
+nnoremap J 5jzz
 
 " nnoremap <M-h> :bnext<CR>
 " nnoremap <M-l> :bprev<CR>
@@ -308,7 +308,7 @@ set background=dark
 " colorscheme solarized
 " let g:solarized_termcolors=256
 " let g:solarized_termtrans=1
-" let g:gruvbox_italic=1
+let g:gruvbox_italic=1
 colorscheme gruvbox
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:gruvbox_termcolors=16
@@ -345,47 +345,52 @@ function! ToggleNumber()
     endif
 endfunc
 
+" ================ Ranger =======================
 " ranger
-fun! RangerChooser(type)
-    exec "silent !ranger --choosefiles=/tmp/chosenfile " . expand("%:p:h")
-    if filereadable('/tmp/chosenfile')
-        if a:type     == 1
-            exec 'Ewindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
-        elseif a:type == 2
-            exec 'Evwindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
-        elseif a:type == 3
-            exec 'Ebufs ' . system('cat /tmp/chosenfile|tr "\n" " "')
-        else
-            exec 'Etabs ' . system('cat /tmp/chosenfile|tr "\n" " "')
-        endif
-        call system('rm /tmp/chosenfile')
-    endif
-    redraw!
-endfun
-command! -nargs=1 Silent
-\ | execute ':silent '.<q-args>
-\ | execute ':redraw!'
-map <leader><leader>r :call RangerChooser(3)<CR>
+" command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
+" command! -complete=file -nargs=+ Ebufs call s:ETW('e', <f-args>)
+" command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
+" command! -complete=file -nargs=+ Evwindows call s:ETW('vnew', <f-args>)
+"
+" function! s:ETW(what, ...)
+"     for f1 in a:000
+"         let files = glob(f1)
+"         if files == ''
+"             execute a:what . ' ' . escape(f1, '\ "''"')
+"         else
+"             for f2 in split(files, "\n")
+"                 execute a:what . ' ' . escape(f2, '\ "''"')
+"             endfor
+"         endif
+"     endfor
+" endfunction
+"
+" fun! RangerChooser(type)
+"     exec "silent !ranger --choosefiles=/tmp/chosenfile " . expand("%:p:h")
+"     if filereadable('/tmp/chosenfile')
+"         if a:type     == 1
+"             exec 'Ewindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
+"         elseif a:type == 2
+"             exec 'Evwindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
+"         elseif a:type == 3
+"             exec 'Ebufs ' . system('cat /tmp/chosenfile|tr "\n" " "')
+"         else
+"             exec 'Etabs ' . system('cat /tmp/chosenfile|tr "\n" " "')
+"         endif
+"         call system('rm /tmp/chosenfile')
+"     endif
+"     redraw!
+" endfun
+"
+" map <leader><leader>r :call RangerChooser(3)<CR>
 " map <leader>rv :call RangerChooser(2)<CR>
 " map <leader>rs :call RangerChooser(1)<CR>
 " map <leader>rb :call RangerChooser(3)<CR>
 " Enable add multiple files to edit
-command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
-command! -complete=file -nargs=+ Ebufs call s:ETW('e', <f-args>)
-" command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
-" command! -complete=file -nargs=+ Evwindows call s:ETW('vnew', <f-args>)
-function! s:ETW(what, ...)
-    for f1 in a:000
-        let files = glob(f1)
-        if files == ''
-            execute a:what . ' ' . escape(f1, '\ "''"')
-        else
-            for f2 in split(files, "\n")
-                execute a:what . ' ' . escape(f2, '\ "''"')
-            endfor
-        endif
-    endfor
-endfunction
+
+command! -nargs=1 Silent
+\ | execute ':silent '.<q-args>
+\ | execute ':redraw!'
 
 function! BufGet()
     return map(getline(1, '$'), "printf('%5d  %s', v:key + 1, v:val)")
@@ -443,7 +448,6 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-" command! MD execute "silent !open -a Marked\\ 2 %"
 command! -nargs=0 MD
 \ | execute ":silent !open -a Marked\\ 2 '%:p'"
 \ | execute ':redraw!'
