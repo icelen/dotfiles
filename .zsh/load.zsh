@@ -9,4 +9,5 @@ source ~/.zsh/aliases.zsh
 source ~/.zsh/history.zsh
 source ~/.zsh/k.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 

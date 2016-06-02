@@ -3,7 +3,7 @@ local ret_status="%(?:%{$fg_bold[green]%}@ :%{$fg_bold[red]%}@ %s)"
 EMOJI=(💩 🐦 🚀 🐞 🎨 🍕 🐭 👽 ☕️ 🔬 💀 🐷 🐼 🐶 🐸 🐧 🐳 🍔 🍣 🍻 🔮 💰 💎 💾 💜 🍪 🌞 🌍 🐌 🐓 🍄 )
 
 function random_emoji {
-  echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
+  echo -n "$EMOJI[$RANDOM%$#EMOJI+1] "
 }
 
 function get_nr_jobs() {

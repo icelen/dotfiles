@@ -59,20 +59,12 @@ call plug#begin('~/.vim/plugged')
 " call vundle#begin()
 " Plugin 'msanders/snipmate.vim'
 Plug 'morhetz/gruvbox'
+Plug 'chriskempson/tomorrow-theme'
 Plug 'sjl/gundo.vim'
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
-" Plug 'xolox/vim-session'
-" set sessionoptions-=help
-" set sessionoptions-=options
-" let g:session_autoload=yes
-" let g:session_autosave=1
-" let g:session_autosave_periodic=5
-" let g:session_verbose_messages=0
-" let g:session_default_to_last=1
-" let g:session_command_aliases=1
 
 Plug 'L9'
 Plug 'LargeFile'
@@ -82,15 +74,7 @@ Plug 'maxbrunsfeld/vim-yankstack'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 Plug 'AutoClose'
-" Bundle 'YankRing.vim'
-" nnoremap <silent> <C-Y>:YRShow<CR>
-" let g:yankring_replace_n_pkey =''
-" let g:yankring_replace_n_nkey =''
-"
-" Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
-" Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/neocomplcache.vim'
 Plug 'Shougo/unite.vim'
 
 "vim-airline
@@ -107,18 +91,19 @@ let g:airline_theme = 'solarized'
 " Plug 'paranoida/vim-airlineish'
 " let g:airline_theme = 'airlineish'
 " let g:airline_theme = 'molokai'
-" let g:airline_theme = 'solarized'
 
 autocmd InsertEnter,InsertLeave * set cul!
 Plug 'flazz/vim-colorschemes'
 Plug 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
-Plug 'ervandew/supertab'
 Plug 'tomtom/tcomment_vim'
 Plug 'myusuf3/numbers.vim'
-" Plug 'davidhalter/jedi-vim'
-" Plug 'Shougo/vimproc.vim'
-" Plug 'Shougo/vimshell.vim'
 
 " Pandoc
 Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' }
@@ -126,7 +111,7 @@ let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#spell#enabled = 1
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-pandoc-after'
-let g:pandoc#after#modules#enabled = ["supertab"]
+" let g:pandoc#after#modules#enabled = ["supertab"]
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#streak = 1
@@ -248,6 +233,20 @@ nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 Plug 'icelen/neovim-ranger'
 map <leader><leader>r :Explore<CR>
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe'
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 call plug#end()
 "}}}
 
@@ -305,13 +304,14 @@ set background=dark
 " let g:monokai_termcolors=256
 " let g:monokai_termtrans=1
 "
-" colorscheme solarized
-" let g:solarized_termcolors=256
-" let g:solarized_termtrans=1
-let g:gruvbox_italic=1
-colorscheme gruvbox
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:gruvbox_termcolors=16
+
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+colorscheme solarized
+" let g:gruvbox_italic=1
+" colorscheme gruvbox
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let g:gruvbox_termcolors=16
 
 " fzf
 set rtp+=~/.fzf
@@ -323,7 +323,6 @@ if has("unix")
     let g:python_host_prog='/usr/local/bin/python'
   endif
 endif
-
 " }}}
 
 " Functions {{{

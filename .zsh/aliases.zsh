@@ -1,4 +1,4 @@
-alias vim=nvim
+# alias vim=nvim
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -30,16 +30,12 @@ alias lc='ls -l | wc -l'
 #   sleep 10; alert
 
 alias matlabno="matlab -nodesktop -nosplash -nojvm"
-alias python="ipython"
+alias ipy="ipython"
 # alias shortcut='gnome-desktop-item-edit ~/Desktop/ --create-new'
 # alias tmux="TERM=screen-256color-bce tmux -2"
 alias howdoi="howdoi -c -n 3"
 alias -g L="|less" # Write L after a command to page through the output.
 alias -g NULL="> /dev/null 2>&1" # You get the idea.
-alias -s py=vim
-alias -s m=vim
-alias -s txt=vim
-alias -s log=vim
 # alias v='f -e vim'
 # alias a='fasd -a'        # any
 # alias s='fasd -si'       # show / search / select
