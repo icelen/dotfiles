@@ -50,7 +50,7 @@ set hidden
 " Vim-Plug {{{
 "
 " Load vim-plug
-if empty(glob("~/.vim/autoload/plug.vim"))
+if empty(glob("~/.config/nvim/autoload/plug.vim"))
     execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 call plug#begin('~/.vim/plugged')
@@ -280,8 +280,8 @@ colorscheme gruvbox
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:gruvbox_termcolors=16
 
-let g:python_host_prog='/usr/local/bin/python'
-let g:python3_host_prog='/usr/local/bin/python3'
+let g:python_host_prog='/opt/twitter/bin/python'
+let g:python3_host_prog='/opt/twitter/bin/python3'
 " }}}
 
 " Keys {{{
