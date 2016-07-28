@@ -5,7 +5,7 @@ ZSH_THEME="my"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(vi-mode python zsh-syntax-highlighting history-substring-search cp wd screen tmux fasd colorize vundle web-search command-not-found osx brew z)
+plugins=(vi-mode python zsh-syntax-highlighting history-substring-search cp tmux fasd colorize command-not-found osx brew z)
 
 # User configuration
 DEFAULT_USER=lcen
