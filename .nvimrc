@@ -235,7 +235,7 @@ Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 Plug 'icelen/neovim-ranger'
-map <leader><leader>r :Explore<CR>
+map <leader><leader>r :Explore %:p:h<CR>
 Plug 'ervandew/supertab'
 function! DoRemote(arg)
   UpdateRemotePlugins
