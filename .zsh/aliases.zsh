@@ -5,9 +5,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias rcd='ranger-cd'
-alias rg='ranger'
+alias rg='ranger-cd'
+# alias rg='ranger'
 alias bk='cd $OLDPWD'
-alias by='byobu-tmux'
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -29,11 +29,10 @@ alias lc='ls -l | wc -l'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 
-alias matlabno="matlab -nodesktop -nosplash -nojvm"
+# alias matlabno="matlab -nodesktop -nosplash -nojvm"
 alias ipy="ipython"
 # alias shortcut='gnome-desktop-item-edit ~/Desktop/ --create-new'
 # alias tmux="TERM=screen-256color-bce tmux -2"
-alias howdoi="howdoi -c -n 3"
 alias -g L="|less" # Write L after a command to page through the output.
 alias -g NULL="> /dev/null 2>&1" # You get the idea.
 # alias v='f -e vim'
@@ -47,14 +46,14 @@ alias -g NULL="> /dev/null 2>&1" # You get the idea.
 # alias zz='fasd_cd -d -i'
 alias fe='vim -p $(fzf -m)'
 # servers
-alias chicago="ssh lcen@chicago.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
-alias km="ssh lcen@kunming.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
-alias nb="ssh lcen@ningbo.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
-alias sj="ssh lcen@sanjose.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
-alias mc18="ssh lcen@mc18.cs.purdue.edu -t 'zsh'"
+# alias chicago="ssh lcen@chicago.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
+# alias km="ssh lcen@kunming.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
+# alias nb="ssh lcen@ningbo.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
+# alias sj="ssh lcen@sanjose.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
+# alias mc18="ssh lcen@mc18.cs.purdue.edu -t 'zsh'"
 alias nest="ssh -R 22088:localhost:22 lcen@hadoopnest1"
 alias abusenest="ssh -R 22288:localhost:22 -t abuse@hadoopnest1"
-alias vnote='vim -c Geeknote'
+# alias vnote='vim -c Geeknote'
 alias marked='open -a Marked\ 2'
 
 # trash

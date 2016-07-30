@@ -68,7 +68,7 @@ Plug 'tmhedberg/matchit'
 Plug 'L9'
 Plug 'LargeFile'
 " Plug 'Terminus'
-Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular'
 Plug 'maxbrunsfeld/vim-yankstack'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
@@ -92,7 +92,7 @@ let g:airline_theme = 'solarized'
 " let g:airline_theme = 'molokai'
 
 autocmd InsertEnter,InsertLeave * set cul!
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -178,18 +178,18 @@ endif
 let g:CtrlSpaceSearchTiming = 200
 " set showtabline=0
 
-Plug 'LaTeX-Box-Team/LaTeX-Box'
-" let g:LatexBox_latexmk_async=1
-let g:LatexBox_autojump=1
-let g:LatexBox_latexmk_preview_continuously=1
-let g:LatexBox_latexmk_options="-f -pdf -outdir='Output'"
-" let g:LatexBox_latexmk_options="-f -outdir='Output' -pdflatex='pdflatex -synctex=1 \%O \%S'"
-let g:LatexBox_build_dir="Output"
-let b:build_dir="Output"
-" map <silent> <Leader>ls :silent
-"             \ !/Applications/Skim.app/Contents/SharedSupport/displayline
-"             \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
-"             \ "%:p" <CR>
+" Plug 'LaTeX-Box-Team/LaTeX-Box'
+" " let g:LatexBox_latexmk_async=1
+" let g:LatexBox_autojump=1
+" let g:LatexBox_latexmk_preview_continuously=1
+" let g:LatexBox_latexmk_options="-f -pdf -outdir='Output'"
+" " let g:LatexBox_latexmk_options="-f -outdir='Output' -pdflatex='pdflatex -synctex=1 \%O \%S'"
+" let g:LatexBox_build_dir="Output"
+" let b:build_dir="Output"
+" " map <silent> <Leader>ls :silent
+" "             \ !/Applications/Skim.app/Contents/SharedSupport/displayline
+" "             \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
+" "             \ "%:p" <CR>
 "
 Plug 'derekwyatt/vim-scala'
 Plug 'solarnz/thrift.vim'
@@ -223,9 +223,9 @@ let g:startify_custom_header =
             \ map(split(system('cowsay Hi Icelen! NEOVIM Here!'), '\n'), '"   ". v:val') + ['']
 
 Plug 'airblade/vim-gitgutter'
-Plug 'kshenoy/vim-signature'
-let g:SignatureMarkerTextHLDynamic=1
-let g:SignatureMarkTextHLDynamic=1
+" Plug 'kshenoy/vim-signature'
+" let g:SignatureMarkerTextHLDynamic=1
+" let g:SignatureMarkTextHLDynamic=1
 " All of your Plugins must be added before the following line
 Plug 'Numkil/ag.nvim'
 let g:ag_working_path_mode="r"
@@ -255,7 +255,7 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
+" Plug 'frankier/neovim-colors-solarized-truecolor-only'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 call plug#end()
