@@ -5,7 +5,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias rcd='ranger-cd'
-alias rg='ranger-cd'
+alias cs='cd ~/workspace/source'
+alias cr='cd $(git rev-parse --show-toplevel)'
+alias rg='ranger'
 # alias rg='ranger'
 alias bk='cd $OLDPWD'
 # enable color support of ls and also add handy aliases
@@ -55,7 +57,7 @@ alias nest="ssh -R 22088:localhost:22 lcen@hadoopnest1"
 alias abusenest="ssh -R 22288:localhost:22 -t abuse@hadoopnest1"
 # alias vnote='vim -c Geeknote'
 alias marked='open -a Marked\ 2'
-
+alias vst='vim $(git rev-parse --show-toplevel)/.git/index'
 # trash
 # alias rm=trash
 # alias remove='/bin/rm'

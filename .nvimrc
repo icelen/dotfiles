@@ -35,7 +35,7 @@ set showcmd
 set t_ut=
 set relativenumber
 set number
-set tabstop=8
+set tabstop=4
 set modeline
 set shiftwidth=4
 set smartindent
@@ -54,12 +54,8 @@ if empty(glob("~/.config/nvim/autoload/plug.vim"))
     execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 call plug#begin('~/.vim/plugged')
-" set the runtime path to include Vundle and initialize
-" set rtp+=~/.vim/bundle/Vundle.vim
-" call vundle#begin()
-" Plugin 'msanders/snipmate.vim'
 Plug 'morhetz/gruvbox'
-Plug 'sjl/gundo.vim'
+" Plug 'sjl/gundo.vim'
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 Plug 'tpope/vim-sensible'
@@ -83,37 +79,28 @@ let g:airline#extensions#syntastic#enabled  = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#fnamemod   = ':t'
 let g:airline#extensions#ctrlspace#enabled  = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = ''
+let g:airline#extensions#branch#displayed_head_limit = 10
 " set laststatus=2
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme = 'solarized'
+" let g:airline_theme = 'solarized dark'
 " let g:airline_theme = 'bubblegum'
 " Plug 'paranoida/vim-airlineish'
 " let g:airline_theme = 'airlineish'
 " let g:airline_theme = 'molokai'
 
 autocmd InsertEnter,InsertLeave * set cul!
-" Plug 'flazz/vim-colorschemes'
-Plug 'scrooloose/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_quiet_messages = {
-        \ "!level":  "errors",
-        \ "type":    "style",
-        \ "regex":   '.*',
-        \ "file:p":  '.*' }
 Plug 'tomtom/tcomment_vim'
 Plug 'myusuf3/numbers.vim'
+Plug 'neomake/neomake'
 
 " Pandoc
-Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' }
-let g:pandoc#modules#disabled = ["folding"]
-let g:pandoc#spell#enabled = 1
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-pandoc/vim-pandoc-after'
+Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' }
+let g:pandoc#spell#enabled = 1
+let g:pandoc#spell#default_langs = ["en_us"]
 " let g:pandoc#after#modules#enabled = ["supertab"]
 
 Plug 'justinmk/vim-sneak'
@@ -129,6 +116,10 @@ Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-fugitive'
 autocmd BufReadPost fugitive://* set bufhidden=delete
+autocmd User fugitive 
+  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+  \   nnoremap <buffer> .. :edit %:h<CR> |
+  \ endif
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-dispatch'
@@ -178,27 +169,15 @@ endif
 let g:CtrlSpaceSearchTiming = 200
 " set showtabline=0
 
-" Plug 'LaTeX-Box-Team/LaTeX-Box'
-" " let g:LatexBox_latexmk_async=1
-" let g:LatexBox_autojump=1
-" let g:LatexBox_latexmk_preview_continuously=1
-" let g:LatexBox_latexmk_options="-f -pdf -outdir='Output'"
-" " let g:LatexBox_latexmk_options="-f -outdir='Output' -pdflatex='pdflatex -synctex=1 \%O \%S'"
-" let g:LatexBox_build_dir="Output"
-" let b:build_dir="Output"
-" " map <silent> <Leader>ls :silent
-" "             \ !/Applications/Skim.app/Contents/SharedSupport/displayline
-" "             \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
-" "             \ "%:p" <CR>
-"
 Plug 'derekwyatt/vim-scala'
 Plug 'solarnz/thrift.vim'
 " Plugin 'christoomey/vim-tmux-navigator'
-" Plugin 'neilagabriel/vim-geeknote'
+Plug 'neilagabriel/vim-geeknote'
+let g:GeeknoteFormat="markdown"
 Plug 'terryma/vim-expand-region'
 Plug 'vim-scripts/mru.vim'
 Plug 'mhinz/vim-startify'
-let g:startify_bookmarks = [ '~/.config/nvim/init.vim' ]
+let g:startify_bookmarks = ['~/.config/nvim/init.vim']
 let g:startify_enable_special         = 0
 let g:startify_files_number           = 8
 let g:startify_relative_path          = 1
@@ -219,14 +198,14 @@ let g:startify_list_order = [
             \ ['   Bookmarks:'],
             \ 'bookmarks',
             \ ]
-let g:startify_custom_header =
-            \ map(split(system('cowsay Hi Icelen! NEOVIM Here!'), '\n'), '"   ". v:val') + ['']
+" let g:startify_custom_header =
+"             \ map(split(system('cowsay Hi Icelen! NEOVIM Here!'), '\n'), '"   ". v:val') + ['']
 
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'airblade/vim-gitgutter'
-" Plug 'kshenoy/vim-signature'
-" let g:SignatureMarkerTextHLDynamic=1
-" let g:SignatureMarkTextHLDynamic=1
-" All of your Plugins must be added before the following line
+Plug 'kshenoy/vim-signature'
+let g:SignatureMarkerTextHLDynamic=1
+let g:SignatureMarkTextHLDynamic=1
 Plug 'Numkil/ag.nvim'
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
@@ -240,24 +219,36 @@ Plug 'ervandew/supertab'
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'vhakulinen/neovim-intellij-complete-deoplete'
-Plug 'Valloric/YouCompleteMe'
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" Plug 'eraserhd/vim-ios'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" UltiSnips
+" The below key bindings are compatible with YouCompletMe integration
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"
+" " better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" let g:deoplete#enable_at_startup = 1
+" Plug 'vhakulinen/neovim-intellij-complete-deoplete'
 " Plug 'frankier/neovim-colors-solarized-truecolor-only'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'edkolev/tmuxline.vim'
+let g:airline#extensions#tmuxline#enabled = 0
+Plug 'dhruvasagar/vim-table-mode'
+let g:table_mode_corner_corner="+"
+let g:table_mode_header_fillchar="="
+Plug 'chrisbra/vim-diff-enhanced'
+" started In Diff-Mode set diffexpr (plugin not loaded yet)
+if &diff
+    let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+endif
+
 call plug#end()
 "}}}
 
@@ -282,6 +273,24 @@ let g:gruvbox_termcolors=16
 
 let g:python_host_prog='/opt/twitter/bin/python'
 let g:python3_host_prog='/opt/twitter/bin/python3'
+" file tpye and syntax
+au BufNewFile,BufRead *.md set filetype=pandoc
+au BufNewFile,BufRead *.markdown set filetype=pandoc
+
+" spells
+set spell spelllang=en_us
+
+" tags
+set tags=tags;/
+
+" VimR
+if has("gui_vimr")
+    set termguicolors
+    set title
+endif
+
+" diff
+set diffopt=filler,vertical,iwhite
 " }}}
 
 " Keys {{{
@@ -474,4 +483,7 @@ vnoremap <silent> # :<C-U>
 command! -nargs=0 MD
 \ | execute ":silent !open -a Marked\\ 2 '%:p'"
 \ | execute ':redraw!'
+
+" Format JSON string
+com! FormatJSON !python -m json.tool
 " }}}

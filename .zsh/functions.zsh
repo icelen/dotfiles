@@ -96,11 +96,18 @@ fd() {
                           -o -type d -print 2> /dev/null | fzf +m) &&
                         cd "$dir"
 }
-fbr() {
+cbr() {
   local branches branch
   branches=$(git branch) &&
   branch=$(echo "$branches" | fzf +m) &&
   git checkout $(echo "$branch" | sed "s/.* //")
+}
+
+fbr() {
+  local branches branch
+  branches=$(git branch) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  echo "$branch" | sed "s/.* //"
 }
 # fda() {
 #   local dir
@@ -132,3 +139,7 @@ vnest() {
     # echo $last
     vim $allButLast scp://lcen@hadoopnest1/$last
 }
+
+
+# bash's PROMPT_COMMAND
+precmd() { eval "$PROMPT_COMMAND" }
