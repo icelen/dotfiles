@@ -12,6 +12,7 @@ export WORDCHARS='*?_[]~=&;!#$%^(){}'
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export GTAGSCONF=/opt/twitter/share/gtags/gtags.conf 
 export GTAGSLABEL=ctags
+export EVENT_NOKQUEUE=1
 ### LESS ###
 # Enable syntax-highlighting in less.
 # brew install source-highlight

@@ -203,6 +203,9 @@ let g:startify_list_order = [
 
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'airblade/vim-gitgutter'
+Plug 'gregsexton/gitv'
+let g:Gitv_OpenHorizontal = 1
+Plug 'jreybert/vimagit'
 Plug 'kshenoy/vim-signature'
 let g:SignatureMarkerTextHLDynamic=1
 let g:SignatureMarkTextHLDynamic=1
@@ -244,6 +247,8 @@ Plug 'dhruvasagar/vim-table-mode'
 let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
 Plug 'chrisbra/vim-diff-enhanced'
+Plug 'FooSoft/vim-argwrap'
+nnoremap <silent> <leader><leader>a :ArgWrap<CR>
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
 if &diff
     let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
@@ -288,6 +293,16 @@ if has("gui_vimr")
     set termguicolors
     set title
 endif
+
+" Better refresh
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+
+" Don't lose selection when shifting sidewards
+xnoremap <  <gv
+xnoremap >  >gv
+" cursorline
+autocmd InsertLeave,WinEnter * set cursorline
+autocmd InsertEnter,WinLeave * set nocursorline
 
 " diff
 set diffopt=filler,vertical,iwhite
