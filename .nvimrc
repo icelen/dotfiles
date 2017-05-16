@@ -182,19 +182,19 @@ let g:startify_enable_special         = 0
 let g:startify_files_number           = 8
 let g:startify_relative_path          = 1
 let g:startify_change_to_dir          = 1
-let g:startify_session_autoload       = 1
+" let g:startify_session_autoload       = 1
 let g:startify_session_persistence    = 1
 let g:startify_session_delete_buffers = 1
 " let g:startify_custom_footer =
             " \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
 
 let g:startify_list_order = [
+            \ ['   Sessions:'],
+            \ 'sessions',
             \ ['   LRU:'],
             \ 'files',
             \ ['   LRU within this dir:'],
             \ 'dir',
-            \ ['   Sessions:'],
-            \ 'sessions',
             \ ['   Bookmarks:'],
             \ 'bookmarks',
             \ ]
@@ -209,15 +209,15 @@ Plug 'jreybert/vimagit'
 Plug 'kshenoy/vim-signature'
 let g:SignatureMarkerTextHLDynamic=1
 let g:SignatureMarkTextHLDynamic=1
-Plug 'Numkil/ag.nvim'
-let g:ag_working_path_mode="r"
-let g:ag_highlight=1
+" Plug 'Numkil/ag.nvim'
+" let g:ag_working_path_mode="r"
+" let g:ag_highlight=1
 Plug 'Chun-Yang/vim-action-ag'
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 Plug 'icelen/neovim-ranger'
-map <leader><leader>r :Explore %:p:h<CR>
+map <leader>r :Explore %:p:h<CR>
 Plug 'ervandew/supertab'
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -240,6 +240,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " Plug 'frankier/neovim-colors-solarized-truecolor-only'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'edkolev/tmuxline.vim'
 let g:airline#extensions#tmuxline#enabled = 0
@@ -254,6 +255,7 @@ if &diff
     let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
 endif
 
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 "}}}
 
@@ -306,6 +308,7 @@ autocmd InsertEnter,WinLeave * set nocursorline
 
 " diff
 set diffopt=filler,vertical,iwhite
+
 " }}}
 
 " Keys {{{
@@ -432,7 +435,7 @@ function! OpenInIntelliJ()
     execute "!/Applications/IntelliJ\\ IDEA\\ 14\\ CE.app/Contents/MacOS/idea /Users/icelen/IdeaProjects/testJavaWithIntelliJ/ --line " . line('.') . " " . expand('%:p') . "&>/dev/null"
 endfunction
 
-nnoremap <leader><leader>i :Silent call OpenInIntelliJ()<CR>
+nnoremap <leader>i :Silent call OpenInIntelliJ()<CR>
 
 " tempfunction for geting appID
 function! GetAppIDs()
@@ -442,22 +445,45 @@ function! GetAppIDs()
 endfunction
 
 " fzf related
-function! Gitroot()
-    return system('git root 2>/dev/null')
+
+function! s:get_git_root()
+  if exists('*fugitive#repo')
+    try
+      return fugitive#repo().tree()
+    catch
+    endtry
+  endif
+  let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
+  return v:shell_error ? '' : root
 endfunction
-" nnoremap <silent> <C-f> :call fzf#run({
-"             \   'source':      BufGet(),
-"             \   'sink':        function('LineOpen'),
-"             \   'options':     '+m',
-"             \   'tmux_height': '40%'
+
+function! s:find_project_root()
+  let projects=['/Users/lcen/workspace/source/macaw-login', '/Users/lcen/workspace/source/passbird', '/Users/lcen/workspace/source/bouncer', '/Users/lcen/workspace/source/macaw-swift']
+  let gitroot=s:get_git_root()
+  call add(projects, gitroot) 
+  let filepath=expand('%:p:h')
+  for path in projects
+      if filepath=~'^' . path
+          return path
+      endif
+  endfor
+  return gitroot
+endfunction
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! ProjectFiles execute 'Files' s:find_project_root()
+command! GitRootFiles execute 'Files' s:get_git_root()
+
+nnoremap <silent> <leader>f :ProjectFiles<CR>
+nnoremap <silent> <leader>F :GitRootFiles<CR>
+" nnoremap <silent> <leader>f :call fzf#run({
+"             \   'dir'     : Gitroot(),
+"             \   'sink'    : 'e',
+"             \   'options' : '-m',
 "             \ })<CR>
-nnoremap <silent> <leader><leader>f :call fzf#run({
-            \   'dir'     : Gitroot(),
-            \   'sink'    : 'e',
-            \   'options' : '-m',
-            \ })<CR>
-" nnoremap <silent> <leader>f :call FZFGit()<CR>
-nnoremap <silent> <leader><leader>m :call fzf#run({
+nnoremap <silent> <leader>m :call fzf#run({
             \'source'  : v:oldfiles,
             \'sink'    : 'e ',
             \'options' : '-m',
@@ -466,6 +492,22 @@ nnoremap <silent> <leader><leader>m :call fzf#run({
 function! s:escape(path)
   return substitute(a:path, ' ', '\\ ', 'g')
 endfunction
+
+" Augmenting Ag command using fzf#vim#with_preview function
+"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
+"     * For syntax-highlighting, Ruby and any of the following tools are required:
+"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
+"       - CodeRay: http://coderay.rubychan.de/
+"       - Rouge: https://github.com/jneen/rouge
+"
+"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Ag! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%', '?'),
+  \                 <bang>0)
+nnoremap <silent> <leader>s :Ag!<CR>
 
 function! AgHandler(line)
   let parts = split(a:line, ':')
@@ -476,10 +518,10 @@ function! AgHandler(line)
 endfunction
 
 command! -nargs=+ Fag call fzf#run({
-            \   'dir'     : Gitroot(),
-            \ 'source': 'ag "<args>"',
-            \ 'sink': function('AgHandler'),
-            \ 'options': '+m',
+            \ 'dir':         Gitroot(),
+            \ 'source':      'ag "<args>"',
+            \ 'sink':        function('AgHandler'),
+            \ 'options':     '+m',
             \ 'tmux_height': '60%'
 \ })
 

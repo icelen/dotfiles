@@ -1,0 +1,40 @@
+[user]
+	name = Lei Cen
+	email = lcen@twitter.com
+[core]
+    excludesfile = /Users/lcen/.gitignore_global
+	autocrlf = false
+	safecrlf = true
+	editor = nvim
+[diff]
+	renames = true
+	tool = vimdiff
+[merge]
+    tool = vimdiff
+[http]
+	postBuffer = 524288000
+[color]
+	ui = true
+[alias]
+    co = checkout
+    ci = commit
+    ca = commit --amend
+    rbm = rebase master
+    st = status
+    stm = !git --no-pager diff --name-status master
+    br = branch
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    unstage = reset HEAD --
+    last = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short --max-count=1
+    ready = diff --cached
+	dt = difftool
+    diff = diff --patience
+[difftool]
+	prompt = false
+[difftool "vimdiff"] 
+	path = nvim
+[mergetool "vimdiff"]
+    # cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	path = nvim
