@@ -63,8 +63,6 @@ Plug 'tmhedberg/matchit'
 
 Plug 'L9'
 Plug 'LargeFile'
-" Plug 'Terminus'
-" Plug 'godlygeek/tabular'
 Plug 'maxbrunsfeld/vim-yankstack'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
@@ -126,31 +124,50 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'repmo.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'kien/rainbow_parentheses.vim'
-let g:rbpt_colorpairs = [
-\ ['brown'       , 'RoyalBlue3'],
-\ ['Darkblue'    , 'SeaGreen3'],
-\ ['darkgray'    , 'DarkOrchid3'],
-\ ['darkgreen'   , 'firebrick3'],
-\ ['darkcyan'    , 'RoyalBlue3'],
-\ ['darkred'     , 'SeaGreen3'],
-\ ['darkmagenta' , 'DarkOrchid3'],
-\ ['brown'       , 'firebrick3'],
-\ ['gray'        , 'RoyalBlue3'],
-\ ['black'       , 'SeaGreen3'],
-\ ['darkmagenta' , 'DarkOrchid3'],
-\ ['Darkblue'    , 'firebrick3'],
-\ ['darkgreen'   , 'RoyalBlue3'],
-\ ['darkcyan'    , 'SeaGreen3'],
-\ ['darkred'     , 'DarkOrchid3'],
-\ ['red'         , 'firebrick3'],
-\ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" Rainbow
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+let g:rainbow_conf = {
+            \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+            \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+            \	'operators': '_,_',
+            \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+            \	'separately': {
+            \		'*': {},
+            \		'vim': {
+            \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+            \		},
+            \		'html': {
+            \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+            \		},
+            \		'css': 0,
+            \	}
+            \}
+" Plug 'kien/rainbow_parentheses.vim'
+" let g:rbpt_colorpairs = [
+" \ ['brown'       , 'RoyalBlue3'],
+" \ ['Darkblue'    , 'SeaGreen3'],
+" \ ['darkgray'    , 'DarkOrchid3'],
+" \ ['darkgreen'   , 'firebrick3'],
+" \ ['darkcyan'    , 'RoyalBlue3'],
+" \ ['darkred'     , 'SeaGreen3'],
+" \ ['darkmagenta' , 'DarkOrchid3'],
+" \ ['brown'       , 'firebrick3'],
+" \ ['gray'        , 'RoyalBlue3'],
+" \ ['black'       , 'SeaGreen3'],
+" \ ['darkmagenta' , 'DarkOrchid3'],
+" \ ['Darkblue'    , 'firebrick3'],
+" \ ['darkgreen'   , 'RoyalBlue3'],
+" \ ['darkcyan'    , 'SeaGreen3'],
+" \ ['darkred'     , 'DarkOrchid3'],
+" \ ['red'         , 'firebrick3'],
+" \ ]
+" let g:rbpt_max = 16
+" let g:rbpt_loadcmd_toggle = 0
+" au VimEnter * RainbowParenthesesToggle
+" au Syntax * RainbowParenthesesLoadRound
+" au Syntax * RainbowParenthesesLoadSquare
+" au Syntax * RainbowParenthesesLoadBraces
 
 Plug 'szw/vim-ctrlspace'
 inoremap <C-Space> <ESC>:CtrlSpace<cr>
@@ -278,7 +295,7 @@ colorscheme gruvbox
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:gruvbox_termcolors=16
 
-let g:python_host_prog='/opt/twitter/bin/python'
+let g:python_host_prog='/opt/twitter/bin/python2'
 let g:python3_host_prog='/opt/twitter/bin/python3'
 " file tpye and syntax
 au BufNewFile,BufRead *.md set filetype=pandoc
@@ -458,7 +475,7 @@ function! s:get_git_root()
 endfunction
 
 function! s:find_project_root()
-  let projects=['/Users/lcen/workspace/source/macaw-login', '/Users/lcen/workspace/source/passbird', '/Users/lcen/workspace/source/bouncer', '/Users/lcen/workspace/source/macaw-swift']
+  let projects=['/Users/lcen/workspace/source/macaw-login', '/Users/lcen/workspace/source/passbird', '/Users/lcen/workspace/source/bouncer', '/Users/lcen/workspace/source/macaw-swift', '/Users/lcen/workspace/source/intern-harness/']
   let gitroot=s:get_git_root()
   call add(projects, gitroot) 
   let filepath=expand('%:p:h')

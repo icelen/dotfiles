@@ -38,3 +38,5 @@
 [mergetool "vimdiff"]
     # cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 	path = nvim
+[push]
+	default = simple
