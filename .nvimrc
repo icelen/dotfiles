@@ -61,12 +61,9 @@ nnoremap <leader>u :GundoToggle<CR>
 Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
 
-Plug 'L9'
-Plug 'LargeFile'
 Plug 'maxbrunsfeld/vim-yankstack'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
-Plug 'AutoClose'
 
 Plug 'Shougo/unite.vim'
 
@@ -122,7 +119,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
-Plug 'repmo.vim'
 Plug 'terryma/vim-multiple-cursors'
 " Rainbow
 Plug 'luochen1990/rainbow'
@@ -266,6 +262,7 @@ let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'FooSoft/vim-argwrap'
+Plug 'henrik/vim-open-url'
 nnoremap <silent> <leader><leader>a :ArgWrap<CR>
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
 if &diff
@@ -273,6 +270,12 @@ if &diff
 endif
 
 Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-grepper'
+
+nnoremap <leader>s :Grepper -side -tool ag<cr>
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
+
 call plug#end()
 "}}}
 
@@ -332,6 +335,8 @@ set diffopt=filler,vertical,iwhite
 " set macmeta
 let mapleader      = "\\"
 let maplocalleader = "\\"
+
+map <SPACE> <leader>
 
 nnoremap j zzj
 nnoremap k zzk
@@ -524,7 +529,7 @@ command! -bang -nargs=* Ag
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%', '?'),
   \                 <bang>0)
-nnoremap <silent> <leader>s :Ag!<CR>
+" nnoremap <silent> <leader>s :Ag!<CR>
 
 function! AgHandler(line)
   let parts = split(a:line, ':')

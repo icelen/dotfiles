@@ -99,14 +99,14 @@ fd() {
 cbr() {
   local branches branch
   branches=$(git branch) &&
-  branch=$(echo "$branches" | fzf +m) &&
+  branch=$(echo "$branches" | tail -r | fzf +m) &&
   git checkout $(echo "$branch" | sed "s/.* //")
 }
 
 fbr() {
   local branches branch
   branches=$(git branch) &&
-  branch=$(echo "$branches" | fzf +m) &&
+  branch=$(echo "$branches" | tail -r | fzf +m) &&
   echo "$branch" | sed "s/.* //"
 }
 # fda() {

@@ -31,6 +31,7 @@
     ready = diff --cached
 	dt = difftool
     diff = diff --patience
+	grep = grep --break --heading --line-number
 [difftool]
 	prompt = false
 [difftool "vimdiff"] 
@@ -40,3 +41,6 @@
 	path = nvim
 [push]
 	default = simple
+[grep]
+	extendRegexp = true
+	lineNumber = true

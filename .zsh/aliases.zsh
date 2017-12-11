@@ -6,6 +6,7 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias rcd='ranger-cd'
 alias cs='cd ~/workspace/source'
+alias css='cd ~/workspace/source2'
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias prettyjson='python -m json.tool'
 alias rg='ranger'
@@ -29,6 +30,7 @@ alias la='ls -AF'
 alias lt='ls -t'
 alias l='ls -CF'
 alias lc='ls -l | wc -l'
+alias cbm='git co master'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 
@@ -62,3 +64,5 @@ alias vst='vim $(git rev-parse --show-toplevel)/.git/index'
 # trash
 # alias rm=trash
 # alias remove='/bin/rm'
+#
+alias gitlast='git log -1 --pretty=%B | pbcopy'
