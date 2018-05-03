@@ -151,10 +151,10 @@ prompt_pure_render_vcs() {
 		if (( ${prompt_pure_vcs[worktree]} )); then
 
       wi=""
-			(( ${prompt_pure_vcs[untracked]} )) && wi+=${PURE_GIT_UNTRACKED:-"%F{214}%{… %G%}"}
-			(( ${prompt_pure_vcs[dirty]} ))     && wi+=${PURE_GIT_DIRTY:-"%F{red}%B%{✚ %G%}%b"}
-			(( ${prompt_pure_vcs[staged]} ))    && wi+=${PURE_GIT_STAGED:-"%F{117}%{● %G%}"}
-			(( ${prompt_pure_vcs[unmerged]} ))  && wi+=${PURE_GIT_UNMERGED:-"%F{9}%{✖ %G%}"}
+			(( ${prompt_pure_vcs[untracked]} )) && wi+=${PURE_GIT_UNTRACKED:-"%F{214}%{${prompt_pure_vcs[untracked]}… %G%}"}
+			(( ${prompt_pure_vcs[dirty]} ))     && wi+=${PURE_GIT_DIRTY:-"%F{red}%B%{${prompt_pure_vcs[dirty]}✚ %G%}%b"}
+			(( ${prompt_pure_vcs[staged]} ))    && wi+=${PURE_GIT_STAGED:-"%F{117}%{${prompt_pure_vcs[staged]}● %G%}"}
+			(( ${prompt_pure_vcs[unmerged]} ))  && wi+=${PURE_GIT_UNMERGED:-"%F{9}%{${prompt_pure_vcs[unmerged]}✖ %G%}"}
       [[ -z $wi ]] && wi+=${PURE_GIT_CLEAN:-"%F{10}%B%{✓%G%}%b"}
       pp+=$wi
 
@@ -344,16 +344,16 @@ prompt_pure_async_git_dirty() {
 	while IFS='' read -r line; do
 		case ${line:0:2} in
 		(DD|AA|?U|U?)
-			reply[unmerged]=1 ;;
+      (( reply[unmerged]+=1 )) ;;
 
 		(?[MDT])
-			reply[dirty]=1 ;|
+      (( reply[dirty]+=1 )) ;;
 
 		([MADRCT]?)
-			reply[staged]=1 ;;
+      (( reply[staged]+=1 )) ;;
 
 		'??')
-			reply[untracked]=1 ;;
+      (( reply[untracked]+=1 )) ;;
 
 		OK)
 			reply[worktree]=1 ;;
