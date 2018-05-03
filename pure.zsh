@@ -106,7 +106,7 @@ prompt_pure_string_length() {
 
 prompt_pure_render_path() {
 	# path
-	pp="%~"
+  pp="%~"
   preprompt+=("$(random_emoji)%F{blue}$pp%f")
 }
 
@@ -626,6 +626,7 @@ function render_vi_mode() {
   echo -n $VIMODE
 }
 
+# override right prompt used be vi-mode plugin
 # function vi_mode_prompt_info() {
 #   echo -n "${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
 # }
