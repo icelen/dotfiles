@@ -43,8 +43,8 @@ zle -N zle-line-finish
 # Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
 # Thanks Ron! (see comments)
 function TRAPINT() {
-      vim_mode=$vim_ins_mode
-        return $(( 128 + $1 ))
+  VIMODE=$vim_ins_mode
+    return $(( 128 + $1 ))
 }
 
 RPROMPT='%{$fg_bold[red]%}[$(get_nr_jobs)] %{$fg_bold[green]%}%*%{$reset_color%}'

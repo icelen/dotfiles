@@ -1,5 +1,6 @@
 
-ZSH_THEME="my"
+ZSH_THEME=""
+# ZSH_THEME="my"
 # ZSH_THEME="robbyrussell"
 
 ENABLE_CORRECTION="true"
@@ -26,6 +27,3 @@ case "$TERM" in
 esac
 
 force_color_prompt=yes
-# set -o vi
-# stty -ixon
-# export KEYTIMEOUT=20
