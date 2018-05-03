@@ -626,8 +626,8 @@ prompt_pure_render_custom() {
 }
 
 # Vim Mode indicator from http://paulgoscicki.com/archives/2012/09/vi-mode-indicator-in-zsh-prompt/
-vim_ins_mode="%{$fg[cyan]%}[I]%{$reset_color%}"
-vim_cmd_mode="%{$fg[red]%}[N]%{$reset_color%}"
+vim_ins_mode="%F{14}❮I❯%f"
+vim_cmd_mode="%F{red}❮N❯%f"
 VIMODE=$vim_ins_mode
 function zle-keymap-select() {
   VIMODE="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
