@@ -106,7 +106,7 @@ prompt_pure_string_length() {
 
 prompt_pure_render_path() {
 	# path
-	pp="%~"
+  pp="%~"
   preprompt+=("$(random_emoji)%F{blue}$pp%f")
 }
 
@@ -143,17 +143,20 @@ prompt_pure_render_vcs() {
 	# git info
 	if (( ${+prompt_pure_vcs[working_tree]} && ! ${+prompt_pure_vcs[unsure]} )); then
 		# branch and action
-		pp=""
-		[[ -n ${prompt_pure_vcs[action]} ]]  && pp+="${prompt_pure_vcs[action]}: "
-		[[ -n ${+prompt_pure_vcs[branch]} ]] && pp+="${prompt_pure_vcs[branch]}"
+		pp="%F{120}⎇ %f"
+		[[ -n ${prompt_pure_vcs[action]} ]]  && pp+="%F{red}${prompt_pure_vcs[action]}%f: "
+		[[ -n ${+prompt_pure_vcs[branch]} ]] && pp+="%F{120}${prompt_pure_vcs[branch]}%f "
 
 		# worktree information (appended)
 		if (( ${prompt_pure_vcs[worktree]} )); then
 
-			(( ${prompt_pure_vcs[untracked]} )) && pp+=${PURE_GIT_UNTRACKED:-'.'}
-			(( ${prompt_pure_vcs[dirty]} ))     && pp+=${PURE_GIT_DIRTY:-'*'}
-			(( ${prompt_pure_vcs[staged]} ))    && pp+=${PURE_GIT_STAGED:-'+'}
-			(( ${prompt_pure_vcs[unmerged]} ))  && pp+=${PURE_GIT_UNMERGED:-'!'}
+      wi=""
+			(( ${prompt_pure_vcs[untracked]} )) && wi+=${PURE_GIT_UNTRACKED:-"%F{214}%{… %G%}"}
+			(( ${prompt_pure_vcs[dirty]} ))     && wi+=${PURE_GIT_DIRTY:-"%F{red}%B%{✚ %G%}%b"}
+			(( ${prompt_pure_vcs[staged]} ))    && wi+=${PURE_GIT_STAGED:-"%F{117}%{● %G%}"}
+			(( ${prompt_pure_vcs[unmerged]} ))  && wi+=${PURE_GIT_UNMERGED:-"%F{9}%{✖ %G%}"}
+      [[ -z $wi ]] && wi+=${PURE_GIT_CLEAN:-"%F{10}%B%{✓%G%}%b"}
+      pp+=$wi
 
 		elif ! (( ${+prompt_pure_vcs[worktree]} )); then
 
@@ -343,10 +346,10 @@ prompt_pure_async_git_dirty() {
 		(DD|AA|?U|U?)
 			reply[unmerged]=1 ;;
 
-		(?[MD])
+		(?[MDT])
 			reply[dirty]=1 ;|
 
-		([MADRC]?)
+		([MADRCT]?)
 			reply[staged]=1 ;;
 
 		'??')
@@ -626,6 +629,7 @@ function render_vi_mode() {
   echo -n $VIMODE
 }
 
+# override right prompt used be vi-mode plugin
 # function vi_mode_prompt_info() {
 #   echo -n "${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
 # }
