@@ -106,7 +106,7 @@ cbr() {
 fbr() {
   local branches branch
   branches=$(git branch) &&
-  branch=$(echo "$branches" | tail -r | fzf +m) &&
+  branch=$(echo "$branches" | tail -r | fzf -m) &&
   echo "$branch" | sed "s/.* //"
 }
 # fda() {

@@ -57,6 +57,7 @@ alias fe='vim -p $(fzf -m)'
 # alias sj="ssh lcen@sanjose.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
 # alias mc18="ssh lcen@mc18.cs.purdue.edu -t 'zsh'"
 alias nest="ssh -R 22088:localhost:22 lcen@hadoopnest1"
+alias nest2="ssh -R 22088:localhost:22 lcen@hadoopnest2"
 alias abusenest="ssh -R 22288:localhost:22 -t abuse@hadoopnest1"
 # alias vnote='vim -c Geeknote'
 alias marked='open -a Marked\ 2'

@@ -7,7 +7,6 @@ set shortmess=a
 " auto load file in case of change outside of Vim
 " set autoread
 syntax enable
-
 " if &term =~ '^screen'
 "     execute "set t_kP=\e[5;*~"
 "     execute "set t_kN=\e[6;*~"
@@ -29,19 +28,18 @@ set nobackup                    "bk:    does not write a persistent backup file 
 set writebackup                 "wb:    does keep a backup file while editing a file
 set lazyredraw                  "lz:    will not redraw the screen while running macros (goes faster)
 set colorcolumn=80
-" et backspace=indent,eol,start
 " set ruler
 set showcmd
 set t_ut=
 set relativenumber
 set number
-set tabstop=4
+set tabstop=2
 set modeline
-set shiftwidth=4
-set smartindent
+set shiftwidth=2
+set smarttab
 set number
 set expandtab
-set softtabstop=4
+set softtabstop=2
 set textwidth=120
 " set autoindent
 set hidden
@@ -92,11 +90,9 @@ Plug 'neomake/neomake'
 
 " Pandoc
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-pandoc-after'
 Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' }
 let g:pandoc#spell#enabled = 1
 let g:pandoc#spell#default_langs = ["en_us"]
-" let g:pandoc#after#modules#enabled = ["supertab"]
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#streak = 1
@@ -111,7 +107,7 @@ Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-fugitive'
 autocmd BufReadPost fugitive://* set bufhidden=delete
-autocmd User fugitive 
+autocmd User fugitive
   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
   \   nnoremap <buffer> .. :edit %:h<CR> |
   \ endif
@@ -124,46 +120,21 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
-            \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-            \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-            \	'operators': '_,_',
-            \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-            \	'separately': {
-            \		'*': {},
-            \		'vim': {
-            \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-            \		},
-            \		'html': {
-            \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-            \		},
-            \		'css': 0,
-            \	}
-            \}
-" Plug 'kien/rainbow_parentheses.vim'
-" let g:rbpt_colorpairs = [
-" \ ['brown'       , 'RoyalBlue3'],
-" \ ['Darkblue'    , 'SeaGreen3'],
-" \ ['darkgray'    , 'DarkOrchid3'],
-" \ ['darkgreen'   , 'firebrick3'],
-" \ ['darkcyan'    , 'RoyalBlue3'],
-" \ ['darkred'     , 'SeaGreen3'],
-" \ ['darkmagenta' , 'DarkOrchid3'],
-" \ ['brown'       , 'firebrick3'],
-" \ ['gray'        , 'RoyalBlue3'],
-" \ ['black'       , 'SeaGreen3'],
-" \ ['darkmagenta' , 'DarkOrchid3'],
-" \ ['Darkblue'    , 'firebrick3'],
-" \ ['darkgreen'   , 'RoyalBlue3'],
-" \ ['darkcyan'    , 'SeaGreen3'],
-" \ ['darkred'     , 'DarkOrchid3'],
-" \ ['red'         , 'firebrick3'],
-" \ ]
-" let g:rbpt_max = 16
-" let g:rbpt_loadcmd_toggle = 0
-" au VimEnter * RainbowParenthesesToggle
-" au Syntax * RainbowParenthesesLoadRound
-" au Syntax * RainbowParenthesesLoadSquare
-" au Syntax * RainbowParenthesesLoadBraces
+      \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+      \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \	'operators': '_,_',
+      \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+      \	'separately': {
+      \		'*': {},
+      \		'vim': {
+      \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+      \		},
+      \		'html': {
+      \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+      \		},
+      \		'css': 0,
+      \	}
+      \}
 
 Plug 'szw/vim-ctrlspace'
 inoremap <C-Space> <ESC>:CtrlSpace<cr>
@@ -172,16 +143,17 @@ nnoremap <silent><C-p> :CtrlSpace O<CR>
 let g:CtrlSpaceStatuslineFunction       = "airline#extensions#ctrlspace#statusline()"
 let g:CtrlSpaceUseTabline               = 1
 let g:airline_exclude_preview           = 1
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+" let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceUseUnicode               = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch    = 1
 let g:CtrlSpaceSaveWorkspaceOnExit      = 1
 if executable("ag")
     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
-let g:CtrlSpaceSearchTiming = 200
+let g:CtrlSpaceSearchTiming = 400
 " set showtabline=0
 
+" scala
 Plug 'derekwyatt/vim-scala'
 Plug 'solarnz/thrift.vim'
 " Plugin 'christoomey/vim-tmux-navigator'
@@ -225,7 +197,7 @@ let g:SignatureMarkTextHLDynamic=1
 " Plug 'Numkil/ag.nvim'
 " let g:ag_working_path_mode="r"
 " let g:ag_highlight=1
-Plug 'Chun-Yang/vim-action-ag'
+Plug 'rking/ag.vim'
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
@@ -243,14 +215,6 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "
-" " better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger = "<tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-" let g:deoplete#enable_at_startup = 1
-" Plug 'vhakulinen/neovim-intellij-complete-deoplete'
-" Plug 'frankier/neovim-colors-solarized-truecolor-only'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -271,12 +235,19 @@ endif
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-grepper'
-
-nnoremap <leader>s :Grepper -side -tool ag<cr>
+nnoremap <leader>s :Grepper -side -tool -jump ag<cr>
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 
+Plug 'majutsushi/tagbar'
+Plug 'Yggdroot/indentLine'
+let g:indentLine_char = '▏'
+
+" rst
+Plug 'vim-scripts/rest.vim'
+
 call plug#end()
+" filetype plugin indent on
 "}}}
 
 " More settings {{{
@@ -301,6 +272,7 @@ let g:gruvbox_termcolors=16
 let g:python_host_prog='/opt/twitter/bin/python2'
 let g:python3_host_prog='/opt/twitter/bin/python3'
 " file tpye and syntax
+au BufNewFile,BufRead *.py set filetype=python
 au BufNewFile,BufRead *.md set filetype=pandoc
 au BufNewFile,BufRead *.markdown set filetype=pandoc
 
@@ -308,6 +280,7 @@ au BufNewFile,BufRead *.markdown set filetype=pandoc
 set spell spelllang=en_us
 
 " tags
+set tagstack
 set tags=tags;/
 
 " VimR
@@ -325,7 +298,8 @@ xnoremap >  >gv
 " cursorline
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
-
+" auto remove tailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 " diff
 set diffopt=filler,vertical,iwhite
 
@@ -338,13 +312,15 @@ let maplocalleader = "\\"
 
 map <SPACE> <leader>
 
+nmap <F8> :TagbarToggle<CR>
+
 nnoremap j zzj
 nnoremap k zzk
 " Display the number of matches for the last search
 nmap <leader># :%s:<C-R>/::gn<cr>
 
-nmap L <End>
-nmap H <HOME>
+nmap L $
+nmap H ^
 
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
@@ -373,6 +349,9 @@ noremap <Right> <Nop>
 nnoremap K 5kzz
 nnoremap J 5jzz
 
+" paste without yank
+vnoremap <leader>p "_0p
+vnoremap <leader>P "_0P
 " nnoremap <M-h> :bnext<CR>
 " nnoremap <M-l> :bprev<CR>
 "
@@ -482,7 +461,7 @@ endfunction
 function! s:find_project_root()
   let projects=['/Users/lcen/workspace/source/macaw-login', '/Users/lcen/workspace/source/passbird', '/Users/lcen/workspace/source/bouncer', '/Users/lcen/workspace/source/macaw-swift', '/Users/lcen/workspace/source/intern-harness/']
   let gitroot=s:get_git_root()
-  call add(projects, gitroot) 
+  call add(projects, gitroot)
   let filepath=expand('%:p:h')
   for path in projects
       if filepath=~'^' . path
@@ -495,7 +474,7 @@ endfunction
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-command! ProjectFiles execute 'Files' s:find_project_root()
+command! ProjectFiles execute 'Files' getcwd()
 command! GitRootFiles execute 'Files' s:get_git_root()
 
 nnoremap <silent> <leader>f :ProjectFiles<CR>
@@ -565,4 +544,15 @@ command! -nargs=0 MD
 
 " Format JSON string
 com! FormatJSON !python -m json.tool
+
+" Twitter indentation
+func! SetTwitterOptions()
+    set softtabstop=2
+    set shiftwidth=2
+    set tabstop=2
+    set expandtab
+    set modeline
+    set colorcolumn=100
+endfunc
+
 " }}}
