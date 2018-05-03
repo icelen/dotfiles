@@ -107,7 +107,7 @@ prompt_pure_string_length() {
 prompt_pure_render_path() {
 	# path
   pp="%~"
-  preprompt+=("$(random_emoji)%F{blue}$pp%f")
+  preprompt+=("%F{blue}$pp%f")
 }
 
 prompt_pure_render_vcs() {
@@ -616,6 +616,15 @@ prompt_pure_vcs_async_fsm() {
 
 # Customization
 #
+if [ -n "$RANGER_LEVEL" ]; then RANGERPROMPT='R'; else RANGERPROMPT=''; fi
+function prompt_ranger() {
+  echo "%F{red}${RANGERPROMPT}%f"
+}
+
+prompt_pure_render_custom() {
+  preprompt+=("$(prompt_ranger)$(random_emoji)")
+}
+
 # Vim Mode indicator from http://paulgoscicki.com/archives/2012/09/vi-mode-indicator-in-zsh-prompt/
 vim_ins_mode="%{$fg[cyan]%}[I]%{$reset_color%}"
 vim_cmd_mode="%{$fg[red]%}[N]%{$reset_color%}"
@@ -784,6 +793,7 @@ prompt_pure_setup() {
 	# a prompt rendering callback should append to the preprompt=() array
 	# declared in a parent scope
 	prompt_pure_pieces=(
+    prompt_pure_render_custom
 		prompt_pure_render_path
 		prompt_pure_render_vcs
 		prompt_pure_render_hostname
