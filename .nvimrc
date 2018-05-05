@@ -156,8 +156,8 @@ let g:CtrlSpaceSearchTiming = 400
 " scala
 Plug 'derekwyatt/vim-scala'
 Plug 'solarnz/thrift.vim'
-" Plugin 'christoomey/vim-tmux-navigator'
-Plug 'neilagabriel/vim-geeknote'
+Plug 'christoomey/vim-tmux-navigator'
+" Plug 'neilagabriel/vim-geeknote'
 let g:GeeknoteFormat="markdown"
 Plug 'terryma/vim-expand-region'
 Plug 'vim-scripts/mru.vim'

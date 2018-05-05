@@ -634,22 +634,11 @@ function zle-keymap-select() {
   zle reset-prompt
   zle -R
 }
-function render_vi_mode() {
-  echo -n $VIMODE
+function zle-line-init() {
+  VIMODE="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
 }
-
-# override right prompt used be vi-mode plugin
-# function vi_mode_prompt_info() {
-#   echo -n "${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-# }
-
-# Fix a bug when you C-c in CMD mode and you'd be prompted with CMD mode indicator, while in fact you would be in INS mode
-# Fixed by catching SIGINT (C-c), set vim_mode to INS and then repropagate the SIGINT, so if anything else depends on it, we will not break it
-# Thanks Ron! (see comments)
-function TRAPINT() {
-  VIMODE=$vim_ins_mode
-    return $(( 128 + $1 ))
-}
+zle -N zle-line-init
 
 EMOJI=(💩 🐦 🚀 🐞 🎨 🍕 🐭 👽 ☕️ 🔬 💀 🐷 🐼 🐶 🐸 🐧 🐳 🍔 🍣 🍻 🔮 💰 💎 💾 💜 🍪 🌞 🌍 🐌 🐓 🍄 )
 
@@ -783,7 +772,7 @@ prompt_pure_setup() {
 		prompt_pure_hostname="%(!.%F{15}.%F{10})%n$prompt_pure_hostname"
 	fi
 
-  PROMPT='$(render_vi_mode)'
+  PROMPT='$VIMODE'
 	# privileged: bright white (base03 = 15)
 	# unprivileged: highlight (base1 = 14)
 	# failed command: red
