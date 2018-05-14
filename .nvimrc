@@ -43,6 +43,7 @@ set softtabstop=2
 set textwidth=120
 " set autoindent
 set hidden
+
 " }}}
 
 " Vim-Plug {{{
@@ -53,17 +54,12 @@ if empty(glob("~/.config/nvim/autoload/plug.vim"))
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
-" Plug 'sjl/gundo.vim'
-" toggle gundo
-nnoremap <leader>u :GundoToggle<CR>
 Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
 
 Plug 'maxbrunsfeld/vim-yankstack'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
-
-Plug 'Shougo/unite.vim'
 
 "vim-airline
 Plug 'vim-airline/vim-airline'
@@ -86,13 +82,7 @@ Plug 'vim-airline/vim-airline-themes'
 autocmd InsertEnter,InsertLeave * set cul!
 Plug 'tomtom/tcomment_vim'
 Plug 'myusuf3/numbers.vim'
-Plug 'neomake/neomake'
-
-" Pandoc
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' }
-let g:pandoc#spell#enabled = 1
-let g:pandoc#spell#default_langs = ["en_us"]
+" Plug 'neomake/neomake'
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#streak = 1
@@ -116,6 +106,7 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'terryma/vim-multiple-cursors'
+
 " Rainbow
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -139,26 +130,31 @@ let g:rainbow_conf = {
 Plug 'szw/vim-ctrlspace'
 inoremap <C-Space> <ESC>:CtrlSpace<cr>
 nnoremap <C-Space> :CtrlSpace<cr>
-nnoremap <silent><C-p> :CtrlSpace O<CR>
-let g:CtrlSpaceStatuslineFunction       = "airline#extensions#ctrlspace#statusline()"
+nnoremap <silent><leader>b :CtrlSpace b<CR>
+let g:CtrlSpaceStatuslineFunction       = 'airline#extensions#ctrlspace#statusline()'
 let g:CtrlSpaceUseTabline               = 1
 let g:airline_exclude_preview           = 1
-" let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceUseUnicode               = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch    = 1
 let g:CtrlSpaceSaveWorkspaceOnExit      = 1
-if executable("ag")
+if executable('ag')
     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
 let g:CtrlSpaceSearchTiming = 400
-" set showtabline=0
+
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup=1
+let g:deoplete#sources={}
+let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips']
+let g:deoplete#omni#input_patterns={}
+let g:deoplete#omni#input_patterns.scala='[^. *\t]\.\w*'
 
 " scala
 Plug 'derekwyatt/vim-scala'
 Plug 'solarnz/thrift.vim'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'neilagabriel/vim-geeknote'
-let g:GeeknoteFormat="markdown"
 Plug 'terryma/vim-expand-region'
 Plug 'vim-scripts/mru.vim'
 Plug 'mhinz/vim-startify'
@@ -167,11 +163,8 @@ let g:startify_enable_special         = 0
 let g:startify_files_number           = 8
 let g:startify_relative_path          = 1
 let g:startify_change_to_dir          = 1
-" let g:startify_session_autoload       = 1
 let g:startify_session_persistence    = 1
 let g:startify_session_delete_buffers = 1
-" let g:startify_custom_footer =
-            " \ ['', "   Vim is charityware. Please read ':help uganda'.", '']
 
 let g:startify_list_order = [
             \ ['   Sessions:'],
@@ -183,8 +176,6 @@ let g:startify_list_order = [
             \ ['   Bookmarks:'],
             \ 'bookmarks',
             \ ]
-" let g:startify_custom_header =
-"             \ map(split(system('cowsay Hi Icelen! NEOVIM Here!'), '\n'), '"   ". v:val') + ['']
 
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'airblade/vim-gitgutter'
@@ -194,10 +185,6 @@ Plug 'jreybert/vimagit'
 Plug 'kshenoy/vim-signature'
 let g:SignatureMarkerTextHLDynamic=1
 let g:SignatureMarkTextHLDynamic=1
-" Plug 'Numkil/ag.nvim'
-" let g:ag_working_path_mode="r"
-" let g:ag_highlight=1
-Plug 'rking/ag.vim'
 Plug 'junegunn/vim-easy-align'
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
@@ -211,43 +198,54 @@ endfunction
 Plug 'SirVer/ultisnips'
 " UltiSnips
 " The below key bindings are compatible with YouCompletMe integration
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 "
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/gv.vim'
+Plug 'junegunn/vim-slash'
+noremap <plug>(slash-after) zz
+
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'edkolev/tmuxline.vim'
 let g:airline#extensions#tmuxline#enabled = 0
 Plug 'dhruvasagar/vim-table-mode'
-let g:table_mode_corner_corner="+"
-let g:table_mode_header_fillchar="="
-Plug 'chrisbra/vim-diff-enhanced'
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
 Plug 'FooSoft/vim-argwrap'
 Plug 'henrik/vim-open-url'
 nnoremap <silent> <leader><leader>a :ArgWrap<CR>
+Plug 'chrisbra/vim-diff-enhanced'
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
 if &diff
     let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
 endif
 
 Plug 'ryanoasis/vim-devicons'
-Plug 'mhinz/vim-grepper'
-nnoremap <leader>s :Grepper -side -tool -jump ag<cr>
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
 
 Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '▏'
 
 " rst
-Plug 'vim-scripts/rest.vim'
+" Plug 'vim-scripts/rest.vim'
+
+Plug 'wellle/targets.vim'
+
+" Pandoc
+Plug 'vim-pandoc/vim-pandoc', { 'for': [ 'pandoc', 'markdown' ] }
+Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': [ 'pandoc', 'markdown' ] }
+au BufNewFile,BufRead *.md set filetype=pandoc
+let g:pandoc#syntax#conceal#use = 1
+let g:pandoc#spell#enabled = 1
+let g:pandoc#spell#default_langs = ['en_us']
+
+Plug 'w0rp/ale'
 
 call plug#end()
-" filetype plugin indent on
 "}}}
 
 " More settings {{{
@@ -273,8 +271,6 @@ let g:python_host_prog='/opt/twitter/bin/python2'
 let g:python3_host_prog='/opt/twitter/bin/python3'
 " file tpye and syntax
 au BufNewFile,BufRead *.py set filetype=python
-au BufNewFile,BufRead *.md set filetype=pandoc
-au BufNewFile,BufRead *.markdown set filetype=pandoc
 
 " spells
 set spell spelllang=en_us
@@ -284,7 +280,7 @@ set tagstack
 set tags=tags;/
 
 " VimR
-if has("gui_vimr")
+if has('gui_vimr')
     set termguicolors
     set title
 endif
@@ -307,8 +303,8 @@ set diffopt=filler,vertical,iwhite
 
 " Keys {{{
 " set macmeta
-let mapleader      = "\\"
-let maplocalleader = "\\"
+let g:mapleader      = "\\"
+let g:maplocalleader = "\\"
 
 map <SPACE> <leader>
 
@@ -376,49 +372,6 @@ function! ToggleNumber()
     endif
 endfunc
 
-" ================ Ranger =======================
-" ranger
-" command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
-" command! -complete=file -nargs=+ Ebufs call s:ETW('e', <f-args>)
-" command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
-" command! -complete=file -nargs=+ Evwindows call s:ETW('vnew', <f-args>)
-"
-" function! s:ETW(what, ...)
-"     for f1 in a:000
-"         let files = glob(f1)
-"         if files == ''
-"             execute a:what . ' ' . escape(f1, '\ "''"')
-"         else
-"             for f2 in split(files, "\n")
-"                 execute a:what . ' ' . escape(f2, '\ "''"')
-"             endfor
-"         endif
-"     endfor
-" endfunction
-"
-" fun! RangerChooser(type)
-"     exec "silent !ranger --choosefiles=/tmp/chosenfile " . expand("%:p:h")
-"     if filereadable('/tmp/chosenfile')
-"         if a:type     == 1
-"             exec 'Ewindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
-"         elseif a:type == 2
-"             exec 'Evwindows ' . system('cat /tmp/chosenfile|tr "\n" " "')
-"         elseif a:type == 3
-"             exec 'Ebufs ' . system('cat /tmp/chosenfile|tr "\n" " "')
-"         else
-"             exec 'Etabs ' . system('cat /tmp/chosenfile|tr "\n" " "')
-"         endif
-"         call system('rm /tmp/chosenfile')
-"     endif
-"     redraw!
-" endfun
-"
-" map <leader><leader>r :call RangerChooser(3)<CR>
-" map <leader>rv :call RangerChooser(2)<CR>
-" map <leader>rs :call RangerChooser(1)<CR>
-" map <leader>rb :call RangerChooser(3)<CR>
-" Enable add multiple files to edit
-
 command! -nargs=1 Silent
 \ | execute ':silent '.<q-args>
 \ | execute ':redraw!'
@@ -480,7 +433,7 @@ command! GitRootFiles execute 'Files' s:get_git_root()
 nnoremap <silent> <leader>f :ProjectFiles<CR>
 nnoremap <silent> <leader>F :GitRootFiles<CR>
 " nnoremap <silent> <leader>f :call fzf#run({
-"             \   'dir'     : Gitroot(),
+"             \   'dir'     : s:get_git_root(),
 "             \   'sink'    : 'e',
 "             \   'options' : '-m',
 "             \ })<CR>
@@ -508,7 +461,7 @@ command! -bang -nargs=* Ag
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
   \                         : fzf#vim#with_preview('right:50%', '?'),
   \                 <bang>0)
-" nnoremap <silent> <leader>s :Ag!<CR>
+nnoremap <silent> <leader>s :Ag!<CR>
 
 function! AgHandler(line)
   let parts = split(a:line, ':')
@@ -519,7 +472,7 @@ function! AgHandler(line)
 endfunction
 
 command! -nargs=+ Fag call fzf#run({
-            \ 'dir':         Gitroot(),
+            \ 'dir':         s:get_git_root(),
             \ 'source':      'ag "<args>"',
             \ 'sink':        function('AgHandler'),
             \ 'options':     '+m',
@@ -527,16 +480,16 @@ command! -nargs=+ Fag call fzf#run({
 \ })
 
 " Search for selected text, forwards or backwards.
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
+" vnoremap <silent> * :<C-U>
+"   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+"   \gvy/<C-R><C-R>=substitute(
+"   \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+"   \gV:call setreg('"', old_reg, old_regtype)<CR>
+" vnoremap <silent> # :<C-U>
+"   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+"   \gvy?<C-R><C-R>=substitute(
+"   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+"   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 command! -nargs=0 MD
 \ | execute ":silent !open -a Marked\\ 2 '%:p'"
