@@ -168,23 +168,23 @@ prompt_pure_render_vcs() {
 		[[ -n $pp ]] && preprompt+=("%F{$clr_worktree}$pp%f")
 
 		# upstream information
-		if (( ${prompt_pure_vcs[upstream]} )); then
-			local even=$(( ! ${prompt_pure_vcs[right]} && ! ${prompt_pure_vcs[left]} ))
-
-			pp=""
-			(( ${prompt_pure_vcs[right]} )) && pp+=${PURE_GIT_DOWN_ARROW:-'⇣'}
-			(( ${prompt_pure_vcs[left]} ))  && pp+=${PURE_GIT_UP_ARROW:-'⇡'}
-			(( ${even} ))                   && pp+=${PURE_GIT_EVEN_ARROW:-}
-			(( ${prompt_pure_vcs[fetch]:-0} == 0 )) && pp+=${PURE_GIT_FETCH_IN_PROCESS:-'(fetch...)'}
-			(( ${prompt_pure_vcs[fetch]:-0} < 0 ))  && pp+=${PURE_GIT_FETCH_FAILED:-'(fetch!)'}
-			[[ -n $pp ]] && preprompt+=("%F{$clr_upstream}$pp%f")
-
-		elif ! (( ${+prompt_pure_vcs[upstream]} )); then
-
-			pp=${PURE_GIT_UPSTREAM_NA:-'?u'}
-			[[ -n $pp ]] && preprompt+=("%F{$clr_na}$pp%f")
-
-		fi
+		# if (( ${prompt_pure_vcs[upstream]} )); then
+		# 	local even=$(( ! ${prompt_pure_vcs[right]} && ! ${prompt_pure_vcs[left]} ))
+    #
+		# 	pp=""
+		# 	(( ${prompt_pure_vcs[right]} )) && pp+=${PURE_GIT_DOWN_ARROW:-'⇣'}
+		# 	(( ${prompt_pure_vcs[left]} ))  && pp+=${PURE_GIT_UP_ARROW:-'⇡'}
+		# 	(( ${even} ))                   && pp+=${PURE_GIT_EVEN_ARROW:-}
+		# 	(( ${prompt_pure_vcs[fetch]:-0} == 0 )) && pp+=${PURE_GIT_FETCH_IN_PROCESS:-'(fetch...)'}
+		# 	(( ${prompt_pure_vcs[fetch]:-0} < 0 ))  && pp+=${PURE_GIT_FETCH_FAILED:-'(fetch!)'}
+		# 	[[ -n $pp ]] && preprompt+=("%F{$clr_upstream}$pp%f")
+    #
+		# elif ! (( ${+prompt_pure_vcs[upstream]} )); then
+    #
+		# 	pp=${PURE_GIT_UPSTREAM_NA:-'?u'}
+		# 	[[ -n $pp ]] && preprompt+=("%F{$clr_na}$pp%f")
+    #
+		# fi
 	fi
 }
 
@@ -325,6 +325,8 @@ prompt_pure_async_git_dirty() {
 	# use cd -q to avoid side effects of changing directory, e.g. chpwd hooks
 	builtin cd -q $dir
 
+  cp .git/index .git/other-index
+
 	local args
 	if (( $untracked )); then
 		args=("-unormal")
@@ -358,7 +360,7 @@ prompt_pure_async_git_dirty() {
 		OK)
 			reply[worktree]=1 ;;
 		esac
-	done < <(git status --porcelain "${args[@]}" && echo OK)
+	done < <(GIT_INDEX_FILE=.git/other-index git status --porcelain "${args[@]}" && echo OK)
 
 	declare -p reply
 }
@@ -628,14 +630,15 @@ prompt_pure_render_custom() {
 # Vim Mode indicator from http://paulgoscicki.com/archives/2012/09/vi-mode-indicator-in-zsh-prompt/
 vim_ins_mode="%F{14}❮I❯%f"
 vim_cmd_mode="%F{red}❮N❯%f"
+vim_vis_mode="%F{yellow}❮V❯%f"
 VIMODE=$vim_ins_mode
 function zle-keymap-select() {
-  VIMODE="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  VIMODE="${${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}/vivis/${vim_vis_mode}}"
   zle reset-prompt
   zle -R
 }
 function zle-line-init() {
-  VIMODE="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  VIMODE="${${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}/vivis/${vim_vis_mode}}"
   zle reset-prompt
 }
 zle -N zle-line-init

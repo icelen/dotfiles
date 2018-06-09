@@ -5,18 +5,8 @@ set t_Co=256
 set t_ut=
 set shortmess=a
 " auto load file in case of change outside of Vim
-" set autoread
+set autoread
 syntax enable
-" if &term =~ '^screen'
-"     execute "set t_kP=\e[5;*~"
-"     execute "set t_kN=\e[6;*~"
-"     execute "set <xUp>=\e[1;*A"
-"     execute "set <xDown>=\e[1;*B"
-"     execute "set <xRight>=\e[1;*C"
-"     execute "set <xLeft>=\e[1;*D"
-" endif
-"
-"
 set backspace=indent,eol,start  "bs:    allows you to backspace over the listed character types
 set linebreak                   "lbr:   causes vim to not wrap text in the middle of a word
 " set wrap                        "wrap:  wraps lines by default
@@ -41,6 +31,8 @@ set number
 set expandtab
 set softtabstop=2
 set textwidth=120
+set noendofline
+set nofixendofline
 " set autoindent
 set hidden
 
@@ -229,6 +221,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '▏'
+let g:indentLine_setConceal = 0
 
 " rst
 " Plug 'vim-scripts/rest.vim'
@@ -236,14 +229,29 @@ let g:indentLine_char = '▏'
 Plug 'wellle/targets.vim'
 
 " Pandoc
-Plug 'vim-pandoc/vim-pandoc', { 'for': [ 'pandoc', 'markdown' ] }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': [ 'pandoc', 'markdown' ] }
+Plug 'vim-pandoc/vim-pandoc', { 'for': [ 'pandoc', 'markdown' ] }
 au BufNewFile,BufRead *.md set filetype=pandoc
 let g:pandoc#syntax#conceal#use = 1
 let g:pandoc#spell#enabled = 1
 let g:pandoc#spell#default_langs = ['en_us']
 
 Plug 'w0rp/ale'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+Plug 'pangloss/vim-javascript'
+Plug 'wookayin/vim-typora'
+Plug 'aklt/plantuml-syntax'
+Plug 'tyru/open-browser.vim'
+Plug 'weirongxu/plantuml-previewer.vim'
+au FileType plantuml let g:plantuml_previewer#plantuml_jar_path = get(
+    \  matchlist(system('cat `which plantuml` | grep plantuml.jar'), '\v.* (\S+plantuml\.jar).*'),
+    \  1,
+    \  0
+    \)
 
 call plug#end()
 "}}}
@@ -271,6 +279,7 @@ let g:python_host_prog='/opt/twitter/bin/python2'
 let g:python3_host_prog='/opt/twitter/bin/python3'
 " file tpye and syntax
 au BufNewFile,BufRead *.py set filetype=python
+au BufNewFile,BufRead *.aurora set filetype=python
 
 " spells
 set spell spelllang=en_us
@@ -278,6 +287,9 @@ set spell spelllang=en_us
 " tags
 set tagstack
 set tags=tags;/
+
+" auto save
+autocmd CursorHold * update
 
 " VimR
 if has('gui_vimr')
@@ -298,6 +310,8 @@ autocmd InsertEnter,WinLeave * set nocursorline
 autocmd BufWritePre * :%s/\s\+$//e
 " diff
 set diffopt=filler,vertical,iwhite
+set showbreak=↪\
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
 " }}}
 

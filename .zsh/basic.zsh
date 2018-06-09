@@ -1,12 +1,11 @@
-
-ZSH_THEME=""
+# ZSH_THEME=""
 # ZSH_THEME="my"
 # ZSH_THEME="robbyrussell"
 
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(vi-mode zsh-syntax-highlighting history-substring-search tmux fasd colorize command-not-found osx brew)
+# plugins=(vi-mode zsh-syntax-highlighting history-substring-search tmux z colorize command-not-found osx brew zsh-autosuggestions)
 
 # User configuration
 DEFAULT_USER=lcen

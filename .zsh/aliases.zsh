@@ -67,3 +67,5 @@ alias vst='vim $(git rev-parse --show-toplevel)/.git/index'
 # alias remove='/bin/rm'
 #
 alias gitlast='git log -1 --pretty=%B | pbcopy'
+alias less='less -m -N -g -i -J --underline-special --SILENT'
+alias more='less'
