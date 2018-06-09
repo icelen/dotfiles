@@ -6,7 +6,7 @@ ZSH_THEME=""
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(vi-mode zsh-syntax-highlighting history-substring-search tmux fasd colorize command-not-found osx brew)
+plugins=(vi-mode zsh-syntax-highlighting history-substring-search tmux fasd colorize command-not-found osx brew zsh-autosuggestions)
 
 # User configuration
 DEFAULT_USER=lcen

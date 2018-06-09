@@ -325,6 +325,8 @@ prompt_pure_async_git_dirty() {
 	# use cd -q to avoid side effects of changing directory, e.g. chpwd hooks
 	builtin cd -q $dir
 
+  cp .git/index .git/other-index
+
 	local args
 	if (( $untracked )); then
 		args=("-unormal")
@@ -358,7 +360,7 @@ prompt_pure_async_git_dirty() {
 		OK)
 			reply[worktree]=1 ;;
 		esac
-	done < <(git status --porcelain "${args[@]}" && echo OK)
+	done < <(GIT_INDEX_FILE=.git/other-index git status --porcelain "${args[@]}" && echo OK)
 
 	declare -p reply
 }
