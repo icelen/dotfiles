@@ -5,8 +5,6 @@
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-# plugins=(vi-mode zsh-syntax-highlighting history-substring-search tmux z colorize command-not-found osx brew zsh-autosuggestions)
-
 # User configuration
 DEFAULT_USER=lcen
 autoload -U compinit
