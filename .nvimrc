@@ -17,7 +17,7 @@ set showmatch                   "sm:    flashes matching brackets or parentheses
 set nobackup                    "bk:    does not write a persistent backup file of an edited file
 set writebackup                 "wb:    does keep a backup file while editing a file
 set lazyredraw                  "lz:    will not redraw the screen while running macros (goes faster)
-set colorcolumn=80
+set colorcolumn=100
 " set ruler
 set showcmd
 set t_ut=
@@ -49,17 +49,13 @@ Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-sensible'
 Plug 'tmhedberg/matchit'
 
-Plug 'maxbrunsfeld/vim-yankstack'
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
-
 "vim-airline
 Plug 'vim-airline/vim-airline'
 let g:airline#extensions#tabline#enabled    = 1
 let g:airline#extensions#syntastic#enabled  = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#fnamemod   = ':t'
-let g:airline#extensions#ctrlspace#enabled  = 1
+" let g:airline#extensions#ctrlspace#enabled  = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#branch#displayed_head_limit = 10
@@ -119,29 +115,29 @@ let g:rainbow_conf = {
       \	}
       \}
 
-Plug 'szw/vim-ctrlspace'
-inoremap <C-Space> <ESC>:CtrlSpace<cr>
-nnoremap <C-Space> :CtrlSpace<cr>
-nnoremap <silent><leader>b :CtrlSpace b<CR>
-let g:CtrlSpaceStatuslineFunction       = 'airline#extensions#ctrlspace#statusline()'
-let g:CtrlSpaceUseTabline               = 1
-let g:airline_exclude_preview           = 1
-let g:CtrlSpaceUseUnicode               = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch    = 1
-let g:CtrlSpaceSaveWorkspaceOnExit      = 1
-if executable('ag')
-    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
-let g:CtrlSpaceSearchTiming = 400
+" Plug 'szw/vim-ctrlspace'
+" inoremap <C-Space> <ESC>:CtrlSpace<cr>
+" nnoremap <C-Space> :CtrlSpace<cr>
+" nnoremap <silent><leader>b :CtrlSpace b<CR>
+" let g:CtrlSpaceStatuslineFunction       = 'airline#extensions#ctrlspace#statusline()'
+" let g:CtrlSpaceUseTabline               = 1
+" let g:airline_exclude_preview           = 1
+" let g:CtrlSpaceUseUnicode               = 1
+" let g:CtrlSpaceSaveWorkspaceOnSwitch    = 1
+" let g:CtrlSpaceSaveWorkspaceOnExit      = 1
+" if executable('ag')
+"     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+" endif
+" let g:CtrlSpaceSearchTiming = 400
 
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/neomru.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup=1
-let g:deoplete#sources={}
-let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips']
-let g:deoplete#omni#input_patterns={}
-let g:deoplete#omni#input_patterns.scala='[^. *\t]\.\w*'
+" Plug 'Shougo/denite.nvim'
+" Plug 'Shougo/neomru.vim'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" let g:deoplete#enable_at_startup=1
+" let g:deoplete#sources={}
+" let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips']
+" let g:deoplete#omni#input_patterns={}
+" let g:deoplete#omni#input_patterns.scala='[^. *\t]\.\w*'
 
 " scala
 Plug 'derekwyatt/vim-scala'
@@ -197,7 +193,14 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/gv.vim'
+nnoremap <silent> <leader>F :Files<CR>
+nnoremap <silent> <leader>f :GFiles<CR>
+nnoremap <silent> <leader>st :GFiles?<CR>
+nnoremap <silent> <leader>m :History<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>cd :Cd<CR>
+
+" Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-slash'
 noremap <plug>(slash-after) zz
 
@@ -208,7 +211,6 @@ Plug 'dhruvasagar/vim-table-mode'
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
 Plug 'FooSoft/vim-argwrap'
-Plug 'henrik/vim-open-url'
 nnoremap <silent> <leader><leader>a :ArgWrap<CR>
 Plug 'chrisbra/vim-diff-enhanced'
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
@@ -236,11 +238,11 @@ let g:pandoc#syntax#conceal#use = 1
 let g:pandoc#spell#enabled = 1
 let g:pandoc#spell#default_langs = ['en_us']
 
-Plug 'w0rp/ale'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'w0rp/ale'
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
 Plug 'pangloss/vim-javascript'
 Plug 'wookayin/vim-typora'
@@ -252,6 +254,18 @@ au FileType plantuml let g:plantuml_previewer#plantuml_jar_path = get(
     \  1,
     \  0
     \)
+
+Plug 'srstevenson/vim-picker'
+nmap <unique> <leader>pe <Plug>PickerEdit
+nmap <unique> <leader>ps <Plug>PickerSplit
+nmap <unique> <leader>pt <Plug>PickerTabedit
+nmap <unique> <leader>pv <Plug>PickerVsplit
+nmap <unique> <leader>pb <Plug>PickerBuffer
+nmap <unique> <leader>ph <Plug>PickerHelp
+let g:picker_find_executable = 'rg'
+let g:picker_find_flags = '--color never --files'
+
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 call plug#end()
 "}}}
@@ -275,14 +289,15 @@ colorscheme gruvbox
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:gruvbox_termcolors=16
 
-let g:python_host_prog='/opt/twitter/bin/python2'
-let g:python3_host_prog='/opt/twitter/bin/python3'
+let g:python_host_prog='/usr/local/bin/python2'
+let g:python3_host_prog='/usr/local/bin/python3'
 " file tpye and syntax
 au BufNewFile,BufRead *.py set filetype=python
 au BufNewFile,BufRead *.aurora set filetype=python
 
 " spells
 set spell spelllang=en_us
+autocmd FileType scala setlocal nospell
 
 " tags
 set tagstack
@@ -365,6 +380,7 @@ vnoremap <leader>P "_0P
 " nnoremap <M-h> :bnext<CR>
 " nnoremap <M-l> :bprev<CR>
 "
+"
 " }}}
 
 " Functions {{{
@@ -442,68 +458,12 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 command! ProjectFiles execute 'Files' getcwd()
-command! GitRootFiles execute 'Files' s:get_git_root()
-
-nnoremap <silent> <leader>f :ProjectFiles<CR>
-nnoremap <silent> <leader>F :GitRootFiles<CR>
-" nnoremap <silent> <leader>f :call fzf#run({
-"             \   'dir'     : s:get_git_root(),
-"             \   'sink'    : 'e',
-"             \   'options' : '-m',
-"             \ })<CR>
-nnoremap <silent> <leader>m :call fzf#run({
-            \'source'  : v:oldfiles,
-            \'sink'    : 'e ',
-            \'options' : '-m',
-            \})<CR>
 
 function! s:escape(path)
   return substitute(a:path, ' ', '\\ ', 'g')
 endfunction
 
-" Augmenting Ag command using fzf#vim#with_preview function
-"   * fzf#vim#with_preview([[options], preview window, [toggle keys...]])
-"     * For syntax-highlighting, Ruby and any of the following tools are required:
-"       - Highlight: http://www.andre-simon.de/doku/highlight/en/highlight.php
-"       - CodeRay: http://coderay.rubychan.de/
-"       - Rouge: https://github.com/jneen/rouge
-"
-"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%', '?'),
-  \                 <bang>0)
-nnoremap <silent> <leader>s :Ag!<CR>
-
-function! AgHandler(line)
-  let parts = split(a:line, ':')
-  let [fn, lno] = parts[0 : 1]
-  execute 'e '. s:escape(fn)
-  execute lno
-  normal! zz
-endfunction
-
-command! -nargs=+ Fag call fzf#run({
-            \ 'dir':         s:get_git_root(),
-            \ 'source':      'ag "<args>"',
-            \ 'sink':        function('AgHandler'),
-            \ 'options':     '+m',
-            \ 'tmux_height': '60%'
-\ })
-
-" Search for selected text, forwards or backwards.
-" vnoremap <silent> * :<C-U>
-"   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-"   \gvy/<C-R><C-R>=substitute(
-"   \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-"   \gV:call setreg('"', old_reg, old_regtype)<CR>
-" vnoremap <silent> # :<C-U>
-"   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-"   \gvy?<C-R><C-R>=substitute(
-"   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-"   \gV:call setreg('"', old_reg, old_regtype)<CR>
+nnoremap <silent> <leader>s :Rg!<CR>
 
 command! -nargs=0 MD
 \ | execute ":silent !open -a Marked\\ 2 '%:p'"
@@ -521,5 +481,9 @@ func! SetTwitterOptions()
     set modeline
     set colorcolumn=100
 endfunc
+
+command! -nargs=* -complete=dir Cd call fzf#run(fzf#wrap(
+  \ {'source': 'find '.(s:get_git_root()).' -type d',
+  \  'sink': 'cd'}))
 
 " }}}

@@ -16,6 +16,8 @@
 	postBuffer = 524288000
 [color]
 	ui = true
+[color "status"]
+  unmerged  = yellow
 [alias]
   co = checkout
   ci = commit

@@ -1,4 +1,5 @@
-source ~/.zplug/init.zsh
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 # Make sure to use double quotes
 zplug "zsh-users/zsh-autosuggestions"
@@ -10,7 +11,7 @@ zplug "b4b4r07/zsh-vimode-visual", defer:3
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "wfxr/forgit"
 zplug "mafredri/zsh-async", from:github
-zplug "icelen/pure", use:pure.zsh, from:github
+zplug "icelen/pure", use:pure.zsh, from:github, as:theme
 PURE_GIT_PULL=0
 
 # Grab binaries from GitHub Releases
@@ -23,7 +24,6 @@ zplug "junegunn/fzf-bin", \
 
 # Supports oh-my-zsh plugins and the like
 zplug "plugins/vi-mode",   from:oh-my-zsh
-zplug "plugins/tmux",   from:oh-my-zsh
 zplug "plugins/colorize",   from:oh-my-zsh
 zplug "plugins/command-not-found",   from:oh-my-zsh
 zplug "plugins/osx",   from:oh-my-zsh

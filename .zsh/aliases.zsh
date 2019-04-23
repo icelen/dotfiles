@@ -9,7 +9,6 @@ alias cs='cd ~/workspace/source'
 alias css='cd ~/workspace/source2'
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias prettyjson='python -m json.tool'
-alias rg='ranger'
 # alias rg='ranger'
 alias bk='cd $OLDPWD'
 # enable color support of ls and also add handy aliases

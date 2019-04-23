@@ -122,3 +122,16 @@ vnest() {
 
 # bash's PROMPT_COMMAND
 precmd() { eval "$PROMPT_COMMAND" }
+
+rg() {
+  if [ "$1" != "" ]; then
+    if [ -d "$1" ]; then
+      ranger "$1"
+    else
+      ranger $(z -e $1)
+    fi
+  else
+    ranger
+  fi
+	return $?
+}

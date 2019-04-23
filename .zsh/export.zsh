@@ -10,18 +10,20 @@ export CDPATH
 # # we take out the slash, period, angle brackets, dash here.
 export WORDCHARS='*?_[]~=&;!#$%^(){}'
 export FZF_DEFAULT_COMMAND='ag -g ""'
-export GTAGSCONF=/opt/twitter/share/gtags/gtags.conf
-export GTAGSLABEL=ctags
 export EVENT_NOKQUEUE=1
 export RANGER_LOAD_DEFAULT_RC=true
 ### LESS ###
 # Enable syntax-highlighting in less.
 # brew install source-highlight
 # First, add these two lines to ~/.bashrc
-export LESSOPEN="| /opt/twitter/bin/src-hilite-lesspipe.sh %s"
+export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/local/opt/ncurses/bin:$PATH"
+export PATH="$PATH:$HOME/.rvm/bin:/opt/twitter_mde/bin" # Add RVM to PATH for scripting
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# Use ripgrep for FZF
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
