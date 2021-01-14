@@ -8,9 +8,11 @@ zplug "zsh-users/zsh-completions"
 # zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "b4b4r07/zsh-vimode-visual", defer:3
-zplug "b4b4r07/enhancd", use:init.sh
+# zplug "b4b4r07/enhancd", use:init.sh
 zplug "wfxr/forgit"
 zplug "mafredri/zsh-async", from:github
+zplug "changyuheng/fz", defer:1
+zplug "djui/alias-tips", from:github
 zplug "icelen/pure", use:pure.zsh, from:github, as:theme
 PURE_GIT_PULL=0
 
@@ -40,3 +42,5 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
+
+export ZSH_PLUGINS_ALIAS_TIPS_TEXT="Alias tip: "

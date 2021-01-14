@@ -262,8 +262,6 @@ nmap <unique> <leader>pt <Plug>PickerTabedit
 nmap <unique> <leader>pv <Plug>PickerVsplit
 nmap <unique> <leader>pb <Plug>PickerBuffer
 nmap <unique> <leader>ph <Plug>PickerHelp
-let g:picker_find_executable = 'rg'
-let g:picker_find_flags = '--color never --files'
 
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
@@ -294,6 +292,8 @@ let g:python3_host_prog='/usr/local/bin/python3'
 " file tpye and syntax
 au BufNewFile,BufRead *.py set filetype=python
 au BufNewFile,BufRead *.aurora set filetype=python
+autocmd FileType python setlocal tabstop=2
+autocmd FileType python setlocal shiftwidth=2
 
 " spells
 set spell spelllang=en_us

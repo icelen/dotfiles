@@ -22,6 +22,7 @@ export LESS=" -R "
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/ncurses/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin:/opt/twitter_mde/bin" # Add RVM to PATH for scripting
+export PATH="/Users/lcen/.rvm/gems/ruby-2.6.3/bin:$PATH"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
