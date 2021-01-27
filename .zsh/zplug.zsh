@@ -10,6 +10,7 @@ zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "b4b4r07/zsh-vimode-visual", defer:3
 # zplug "b4b4r07/enhancd", use:init.sh
 zplug "wfxr/forgit"
+zplug "zpm-zsh/clipboard", from:github
 zplug "mafredri/zsh-async", from:github
 zplug "changyuheng/fz", defer:1
 zplug "djui/alias-tips", from:github

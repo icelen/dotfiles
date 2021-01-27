@@ -24,7 +24,8 @@ export PATH="/usr/local/opt/ncurses/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin:/opt/twitter_mde/bin" # Add RVM to PATH for scripting
 export PATH="/Users/lcen/.rvm/gems/ruby-2.6.3/bin:$PATH"
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$JAVA_HOME/bin:$GOPATH/bin:$PATH
 
 # Use ripgrep for FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
