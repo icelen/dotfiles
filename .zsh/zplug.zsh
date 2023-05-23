@@ -1,4 +1,4 @@
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 # Make sure to use double quotes
@@ -16,14 +16,6 @@ zplug "changyuheng/fz", defer:1
 zplug "djui/alias-tips", from:github
 zplug "icelen/pure", use:pure.zsh, from:github, as:theme
 PURE_GIT_PULL=0
-
-# Grab binaries from GitHub Releases
-# and rename with the "rename-to:" tag
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*darwin*amd64*"
 
 # Supports oh-my-zsh plugins and the like
 zplug "plugins/vi-mode",   from:oh-my-zsh

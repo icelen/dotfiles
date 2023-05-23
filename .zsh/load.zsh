@@ -7,6 +7,6 @@ source ~/.zsh/functions.zsh
 source ~/.zsh/export.zsh
 source ~/.zsh/zplug.zsh
 # Tmuxinator complete file
-source ~/bin/tmuxinator.zsh
+# source ~/bin/tmuxinator.zsh
 source ~/.zsh/setopt.zsh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

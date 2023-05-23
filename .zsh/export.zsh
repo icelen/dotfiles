@@ -1,4 +1,3 @@
-export ZSH=$HOME/.oh-my-zsh
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -12,6 +11,7 @@ export WORDCHARS='*?_[]~=&;!#$%^(){}'
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export EVENT_NOKQUEUE=1
 export RANGER_LOAD_DEFAULT_RC=true
+export XDG_CONFIG_HOME=$HOME/.config
 ### LESS ###
 # Enable syntax-highlighting in less.
 # brew install source-highlight
