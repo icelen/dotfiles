@@ -13,6 +13,7 @@ zplug "wfxr/forgit"
 zplug "zpm-zsh/clipboard", from:github
 zplug "mafredri/zsh-async", from:github
 zplug "changyuheng/fz", defer:1
+zplug "rupa/z", use:z.sh
 zplug "djui/alias-tips", from:github
 zplug "icelen/pure", use:pure.zsh, from:github, as:theme
 PURE_GIT_PULL=0
@@ -21,9 +22,7 @@ PURE_GIT_PULL=0
 zplug "plugins/vi-mode",   from:oh-my-zsh
 zplug "plugins/colorize",   from:oh-my-zsh
 zplug "plugins/command-not-found",   from:oh-my-zsh
-zplug "plugins/osx",   from:oh-my-zsh
 zplug "plugins/brew",   from:oh-my-zsh
-zplug "plugins/z",   from:oh-my-zsh
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then

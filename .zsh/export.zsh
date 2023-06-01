@@ -19,13 +19,14 @@ export XDG_CONFIG_HOME=$HOME/.config
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/opt/ncurses/bin:$PATH"
-export PATH="$PATH:$HOME/.rvm/bin:/opt/twitter_mde/bin" # Add RVM to PATH for scripting
-export PATH="/Users/lcen/.rvm/gems/ruby-2.6.3/bin:$PATH"
 export GOPATH=$HOME/go
+export GOROOT=/opt/homebrew/opt/go/libexec
+export GOBIN=$GOPATH/bin
+export GOPRIVATE="*.byted.org,*.everphoto.cn,git.smartisan.com"
 export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$GOROOT/bin:$GOBIN:$PATH
 export PATH=$JAVA_HOME/bin:$GOPATH/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
 
 # Use ripgrep for FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'

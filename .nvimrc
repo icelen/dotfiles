@@ -83,12 +83,12 @@ omap F <Plug>Sneak_S
 
 Plug 'tpope/vim-surround'
 
-Plug 'tpope/vim-fugitive'
-autocmd BufReadPost fugitive://* set bufhidden=delete
-autocmd User fugitive
-  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-  \   nnoremap <buffer> .. :edit %:h<CR> |
-  \ endif
+" Plug 'tpope/vim-fugitive'
+" autocmd BufReadPost fugitive://* set bufhidden=delete
+" autocmd User fugitive
+"   \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+"   \   nnoremap <buffer> .. :edit %:h<CR> |
+"   \ endif
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-dispatch'
