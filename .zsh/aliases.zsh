@@ -5,10 +5,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias rcd='ranger-cd'
-alias cg='cd ~/go_repos'
+alias cg='cd ~/go/src/code.byted.org/'
 alias cr='cd $(git rev-parse --show-toplevel)'
 alias prettyjson='python -m json.tool'
-# alias rg='ranger'
 alias bk='cd $OLDPWD'
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -70,3 +69,5 @@ alias more='less'
 alias fix='git diff --name-only | uniq | xargs $EDITOR'
 alias kinit='kinit lei.cen@BYTEDANCE.COM'
 alias gmt='go mod tidy'
+
+eval $(/opt/homebrew/bin/thefuck --alias ff)

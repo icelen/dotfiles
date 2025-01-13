@@ -9,4 +9,10 @@ source ~/.zsh/zplug.zsh
 # Tmuxinator complete file
 # source ~/bin/tmuxinator.zsh
 source ~/.zsh/setopt.zsh
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# eval
+eval "$(/opt/homebrew/bin/pyenv init -)"
+eval "$(zoxide init zsh)"
+eval "$(thefuck --alias)"
+eval "$(starship init zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

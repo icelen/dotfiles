@@ -123,7 +123,7 @@ vnest() {
 # bash's PROMPT_COMMAND
 precmd() { eval "$PROMPT_COMMAND" }
 
-rg() {
+rgr() {
   if [ "$1" != "" ]; then
     if [ -d "$1" ]; then
       ranger "$1"
@@ -134,4 +134,14 @@ rg() {
     ranger
   fi
 	return $?
+}
+eval $(/opt/homebrew/bin/thefuck --alias)
+
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }

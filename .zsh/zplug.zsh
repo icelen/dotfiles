@@ -12,10 +12,10 @@ zplug "b4b4r07/zsh-vimode-visual", defer:3
 zplug "wfxr/forgit"
 zplug "zpm-zsh/clipboard", from:github
 zplug "mafredri/zsh-async", from:github
-zplug "changyuheng/fz", defer:1
-zplug "rupa/z", use:z.sh
+# zplug "changyuheng/fz", defer:1
+# zplug "rupa/z", use:z.sh
 zplug "djui/alias-tips", from:github
-zplug "icelen/pure", use:pure.zsh, from:github, as:theme
+# zplug "icelen/pure", use:pure.zsh, from:github, as:theme
 PURE_GIT_PULL=0
 
 # Supports oh-my-zsh plugins and the like
