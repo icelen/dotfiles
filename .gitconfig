@@ -1,6 +1,18 @@
 [user]
-    name = Lei Cen
-    email = cenlei2000@gmail.com
+        name = lei.cen
+        email = lei.cen@bytedance.com
+[url "ssh://lei.cen@git.byted.org:29418"]
+        insteadOf = https://git.byted.org
+[url "ssh://lei.cen@git.byted.org:29418"]
+        insteadOf = https://review.byted.org
+[url "git@code.byted.org:"]
+        insteadOf = https://code.byted.org/
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
 [credential]
     helper = osxkeychain
 [core]
