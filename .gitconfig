@@ -16,24 +16,34 @@
 [credential]
     helper = osxkeychain
 [core]
-    excludesfile = /Users/icelen/.gitignore_global
+	excludesfile = /Users/bytedance/.gitignore_global
 	autocrlf = false
 	safecrlf = true
-	editor = vim
+	editor = nvim
 ; [mergetool "sourcetree"]
 ; 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 ; 	trustExitCode = true
 [alias]
-    co = checkout
-    ci = commit -a
-    st = status
-    br = branch
-    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-    type = cat-file -t
-    dump = cat-file -p
-    unstage = reset HEAD --
-    last = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short --max-count=1
-    ready = diff --cached
-    amend = commit --amend
+  co = checkout
+  ci = commit -a
+  ca = commit --amend -a
+  pf = push --force
+  st = status
+  br = branch
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+  unstage = reset HEAD --
+  last = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short --max-count=1
+  ready = diff --cached
+  amend = commit --amend
 [push]
-    default = simple
+  default = simple
+[fetch]
+	prune = true
+[gc]
+	auto = 1
+[diff]
+  external = difft --color=always
+[safe]
+	directory = *

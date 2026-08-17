@@ -47,6 +47,7 @@ alias -g NULL="> /dev/null 2>&1" # You get the idea.
 # alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 # alias zz='fasd_cd -d -i'
 alias fe='vim -p $(fzf -m)'
+alias bytedcli='NPM_CONFIG_REGISTRY=http://bnpm.byted.org npx -y @bytedance-dev/bytedcli@latest'
 # servers
 # alias chicago="ssh lcen@chicago.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
 # alias km="ssh lcen@kunming.cs.purdue.edu -t 'cd /scratch8/lcen;zsh'"
@@ -69,5 +70,6 @@ alias more='less'
 alias fix='git diff --name-only | uniq | xargs $EDITOR'
 alias kinit='kinit lei.cen@BYTEDANCE.COM'
 alias gmt='go mod tidy'
+alias cursor='agent'
 
 eval $(/opt/homebrew/bin/thefuck --alias ff)
